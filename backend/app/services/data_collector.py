@@ -4,6 +4,9 @@ import math
 import httpx
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Any, Tuple
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from ..models.schemas import HourlyForecastPoint, CPCBStation, AerosolFeedbackDiagnostic
 from .coupled_physics import deg_to_compass, calculate_indian_aqi, compute_aerosol_radiation_feedback
@@ -76,10 +79,32 @@ async def fetch_open_meteo_live() -> Tuple[List[Dict[str, Any]], bool]:
                         "o3": o3s[i] if i < len(o3s) and o3s[i] else 35.0,
                     })
                 return points, True
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"Open-Meteo fetch failed: {e}")
     
     return [], False
+
+async def fetch_openaq_live_pm25() -> float:
+    """Fetches real-time average PM2.5 for Delhi from OpenAQ."""
+    api_key = os.getenv("OpenAQ_API", "")
+    headers = {"X-API-Key": api_key} if api_key else {}
+    url = "https://api.openaq.org/v2/latest?city=Delhi&parameter=pm25&limit=10"
+    try:
+        async with httpx.AsyncClient(timeout=4.0) as client:
+            resp = await client.get(url, headers=headers)
+            if resp.status_code == 200:
+                results = resp.json().get("results", [])
+                pm25_vals = []
+                for res in results:
+                    for m in res.get("measurements", []):
+                        if m.get("parameter") == "pm25" and m.get("value", -1) >= 0:
+                            pm25_vals.append(m.get("value"))
+                if pm25_vals:
+                    return sum(pm25_vals) / len(pm25_vals)
+    except Exception as e:
+        print(f"OpenAQ error: {e}")
+    
+    return -1.0 # indicating failure to fetch
 
 import asyncio
 
@@ -152,16 +177,55 @@ def generate_coupled_72h_simulation(start_dt: datetime) -> List[Dict[str, Any]]:
 
 async def build_72h_forecast_dataset() -> Tuple[List[HourlyForecastPoint], List[AerosolFeedbackDiagnostic]]:
     """
-    Assembles complete 72-hour coupled forecast points with feedback & ML corrections.
+    Assembles complete 72-hour coupled forecast points with:
+      - Live weather from Open-Meteo
+      - Live PM2.5 baseline from OpenAQ
+      - Live stubble fire plume predictions from NASA FIRMS
+      - Two-way aerosol-radiation-PBL feedback with plume injection
+      - ML bias correction
     """
+    from .plume_dispersion import compute_live_plume_trajectories
+    from .coupled_physics import build_plume_arrival_schedule
+
     now = datetime.now(timezone(timedelta(hours=5, minutes=30)))
-    live_points, is_live = await fetch_open_meteo_live()
+    
+    # Fetch Live Data concurrently
+    live_points_task = fetch_open_meteo_live()
+    openaq_pm25_task = fetch_openaq_live_pm25()
+    
+    (live_points, is_live), live_pm25 = await asyncio.gather(live_points_task, openaq_pm25_task)
     
     if not is_live or len(live_points) < 72:
         raw_dataset = generate_coupled_72h_simulation(now)
     else:
         raw_dataset = live_points
         
+    # Baseline correction: If OpenAQ gave us a real live PM2.5, we align the forecast start
+    if live_pm25 > 0 and len(raw_dataset) > 0:
+        model_initial_pm25 = raw_dataset[0]["pm25"]
+        # Simple ratio scaling to align forecast with ground truth
+        ratio = live_pm25 / max(1.0, model_initial_pm25)
+        for pt in raw_dataset:
+            pt["pm25"] = pt["pm25"] * ratio
+            pt["pm10"] = pt["pm10"] * ratio  # Scale PM10 roughly the same
+
+    # Fetch live plume trajectories and build arrival schedule
+    try:
+        current_ws = raw_dataset[0]["wind_speed"] if raw_dataset else 8.0
+        current_wd = raw_dataset[0]["wind_dir"] if raw_dataset else 315.0
+        current_pbl = raw_dataset[0]["pbl"] if raw_dataset else 400.0
+
+        trajectories, total_plume_impact = await compute_live_plume_trajectories(
+            delhi_wind_speed=current_ws,
+            delhi_wind_dir=current_wd,
+            delhi_pbl=current_pbl,
+        )
+        plume_schedule = build_plume_arrival_schedule(trajectories, forecast_hours=72)
+        print(f"[COUPLED] Plume schedule built: peak incoming = {max(plume_schedule):.1f} ug/m3, total impact = {total_plume_impact:.1f} ug/m3")
+    except Exception as e:
+        print(f"[COUPLED] Plume trajectory fetch failed, running without plume data: {e}")
+        plume_schedule = [0.0] * 72
+
     forecast_points: List[HourlyForecastPoint] = []
     feedback_diagnostics: List[AerosolFeedbackDiagnostic] = []
     
@@ -180,8 +244,12 @@ async def build_72h_forecast_dataset() -> Tuple[List[HourlyForecastPoint], List[
         raw_no2 = item["no2"]
         raw_o3 = item["o3"]
         
-        # 1. Coupled Aerosol-Radiation Feedback
-        feedback = compute_aerosol_radiation_feedback(temp, base_pbl, raw_pm25, hour_of_day)
+        # 1. Coupled Aerosol-Radiation Feedback (with plume injection)
+        incoming_plume = plume_schedule[h] if h < len(plume_schedule) else 0.0
+        feedback = compute_aerosol_radiation_feedback(
+            temp, base_pbl, raw_pm25, hour_of_day,
+            incoming_plume_pm25=incoming_plume,
+        )
         coupled_pm25 = feedback["coupled_pm25"]
         coupled_pbl = feedback["coupled_pbl_m"]
         

@@ -172,3 +172,40 @@ export interface SimulationResult {
     reduction_ug_m3: number;
   }[];
 }
+
+export interface CartoBasemapOption {
+  id: string;
+  name: string;
+  description: string;
+  url?: string;
+  base_url?: string;
+  labels_url?: string;
+  subdomains: string;
+  maxZoom: number;
+  attribution: string;
+}
+
+export interface CartoPresetRegion {
+  name: string;
+  center: [number, number];
+  zoom: number;
+  description: string;
+}
+
+export interface CartoConfig {
+  carto_connected: boolean;
+  api_key_status: string;
+  carto_api_key_masked: string;
+  engine_version: string;
+  default_basemap: string;
+  basemaps: Record<string, CartoBasemapOption>;
+  presets: Record<string, CartoPresetRegion>;
+  airshed_geojson?: any;
+}
+
+export interface AnomalyFocus {
+  lat: number;
+  lon: number;
+  name: string;
+  severity: string;
+}

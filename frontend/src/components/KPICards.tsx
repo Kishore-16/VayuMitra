@@ -12,9 +12,10 @@ import type { ForecastSummary, HourlyForecastPoint } from "../types";
 interface KPICardsProps {
   summary: ForecastSummary | null;
   currentPoint: HourlyForecastPoint | null;
+  camsData?: any;
 }
 
-export const KPICards: React.FC<KPICardsProps> = ({ summary, currentPoint }) => {
+export const KPICards: React.FC<KPICardsProps> = ({ summary, currentPoint, camsData }) => {
   if (!summary || !currentPoint) return null;
 
   const getAQIColor = (aqi: number) => {
@@ -101,7 +102,7 @@ export const KPICards: React.FC<KPICardsProps> = ({ summary, currentPoint }) => 
           <span className="text-xs text-slate-400">of PM2.5</span>
         </div>
         <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Urban: {currentPoint.urban_contribution_pct}%</span>
+          <span>{camsData?.products?.[currentPoint.hour_offset]?.speciation_black_carbon_ug_m3 ? `CAMS BC: ${camsData.products[currentPoint.hour_offset].speciation_black_carbon_ug_m3} µg` : `Urban: ${currentPoint.urban_contribution_pct}%`}</span>
           <span className="text-amber-300 font-medium">NW Advection</span>
         </div>
       </div>
@@ -120,7 +121,7 @@ export const KPICards: React.FC<KPICardsProps> = ({ summary, currentPoint }) => 
           </span>
         </div>
         <div className="mt-1 text-[11px] text-slate-400 flex items-center justify-between">
-          <span>Feedback Dimming</span>
+          <span>{camsData?.products?.[currentPoint.hour_offset]?.aod_550nm ? `CAMS AOD: ${camsData.products[currentPoint.hour_offset].aod_550nm.toFixed(2)}` : "Feedback Dimming"}</span>
           <span className="text-rose-400 font-medium">2-Way Coupled</span>
         </div>
       </div>

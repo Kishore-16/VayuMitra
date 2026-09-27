@@ -1,5 +1,5 @@
 import React from "react";
-import { Activity, ShieldAlert, RefreshCw, Wind, Flame, CloudRain } from "lucide-react";
+import { Activity, ShieldAlert, RefreshCw, Wind, Flame, CloudRain, AlertTriangle } from "lucide-react";
 import type { ForecastSummary, GRAPStatusResponse } from "../types";
 
 interface NavbarProps {
@@ -30,10 +30,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems = [
     { id: "map", label: "Coupled GIS Map", icon: Wind },
+    { id: "mappls", label: "MapmyIndia 3D", icon: Activity },
     { id: "sounding", label: "Inversion Sounding", icon: CloudRain },
     { id: "feedback", label: "Aerosol Feedback", icon: Activity },
     { id: "plumes", label: "Stubble Plumes", icon: Flame },
     { id: "grap", label: "GRAP Advisor", icon: ShieldAlert },
+    { id: "anomalies", label: "Anomaly Alert", icon: AlertTriangle },
   ];
 
   return (

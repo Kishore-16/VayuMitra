@@ -8,10 +8,17 @@ import type {
   GRAPStatusResponse,
   ForecastSummary,
   SimulationParams,
-  SimulationResult
+  SimulationResult,
+  CartoConfig
 } from "../types";
 
 const API_BASE = "http://localhost:8000/api";
+
+export async function fetchCartoConfig(): Promise<CartoConfig> {
+  const res = await fetch(`${API_BASE}/carto/config`);
+  if (!res.ok) throw new Error("Failed to fetch CARTO GIS configuration");
+  return res.json();
+}
 
 export async function fetchForecast72h(): Promise<HourlyForecastPoint[]> {
   const res = await fetch(`${API_BASE}/forecast/72h`);
@@ -28,6 +35,18 @@ export async function fetchForecastSummary(): Promise<ForecastSummary> {
 export async function fetchFeedbackDiagnostics(): Promise<AerosolFeedbackDiagnostic[]> {
   const res = await fetch(`${API_BASE}/forecast/feedback`);
   if (!res.ok) throw new Error("Failed to fetch feedback diagnostics");
+  return res.json();
+}
+
+export async function fetchCamsData(): Promise<any> {
+  const res = await fetch(`${API_BASE}/forecast/cams`);
+  if (!res.ok) throw new Error("Failed to fetch CAMS data");
+  return res.json();
+}
+
+export async function fetchWindGrid(): Promise<any> {
+  const res = await fetch(`${API_BASE}/forecast/wind-grid`);
+  if (!res.ok) throw new Error("Failed to fetch wind grid data");
   return res.json();
 }
 

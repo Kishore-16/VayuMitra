@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { KPICards } from "./components/KPICards";
 import { TimelineSlider } from "./components/TimelineSlider";
-import { GISMap } from "./components/GISMap";
+import { GISMap } from "./components/LeafletMap";
+import { MapplsView } from "./components/MapplsView";
 import { InversionSoundingView } from "./components/InversionSoundingView";
 import { CoupledFeedbackView } from "./components/CoupledFeedbackView";
 import { StubblePlumeView } from "./components/StubblePlumeView";
 import { GRAPAdvisorView } from "./components/GRAPAdvisorView";
 import { PolicySimulatorModal } from "./components/PolicySimulatorModal";
 import { StationDetailModal } from "./components/StationDetailModal";
+import { IndustrialAnomaliesView } from "./components/IndustrialAnomaliesView";
 
 import type {
   HourlyForecastPoint,
@@ -18,7 +20,8 @@ import type {
   PlumeTrajectory,
   AerosolFeedbackDiagnostic,
   GRAPStatusResponse,
-  ForecastSummary
+  ForecastSummary,
+  AnomalyFocus
 } from "./types";
 
 import {
@@ -52,11 +55,15 @@ export const App: React.FC = () => {
   const [fires, setFires] = useState<StubbleFire[]>([]);
   const [trajectories, setTrajectories] = useState<PlumeTrajectory[]>([]);
   const [grap, setGrap] = useState<GRAPStatusResponse | null>(null);
+  const [camsData, setCamsData] = useState<any>(null);
+  const [windGrid, setWindGrid] = useState<any>(null);
+  const [anomalyFocus, setAnomalyFocus] = useState<AnomalyFocus | null>(null);
 
   // Initial Data Fetch
   const loadInitialData = async () => {
     setIsLoading(true);
     try {
+      const { fetchCamsData, fetchWindGrid } = await import("./services/api");
       const [
         forecastData,
         summaryData,
@@ -65,7 +72,9 @@ export const App: React.FC = () => {
         soundingData,
         firesData,
         trajectoriesData,
-        grapData
+        grapData,
+        camsResult,
+        windGridResult
       ] = await Promise.all([
         fetchForecast72h(),
         fetchForecastSummary(),
@@ -74,7 +83,9 @@ export const App: React.FC = () => {
         fetchInversionSounding(0),
         fetchActiveFires(),
         fetchPlumeTrajectories(),
-        fetchGRAPStatus()
+        fetchGRAPStatus(),
+        fetchCamsData().catch(() => null),
+        fetchWindGrid().catch(() => null)
       ]);
 
       setForecast(forecastData);
@@ -85,6 +96,8 @@ export const App: React.FC = () => {
       setFires(firesData);
       setTrajectories(trajectoriesData);
       setGrap(grapData);
+      setCamsData(camsResult);
+      setWindGrid(windGridResult);
     } catch (err) {
       console.error("Failed to load operational data:", err);
     } finally {
@@ -121,7 +134,7 @@ export const App: React.FC = () => {
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 space-y-5">
         {/* Top KPI Diagnostics */}
-        <KPICards summary={summary} currentPoint={currentPoint} />
+        <KPICards summary={summary} currentPoint={currentPoint} camsData={camsData} />
 
         {/* 72-Hour Interactive Time Scrubber */}
         <TimelineSlider
@@ -144,6 +157,9 @@ export const App: React.FC = () => {
                 trajectories={trajectories}
                 currentPoint={currentPoint}
                 onSelectStation={setSelectedStation}
+                windGrid={windGrid}
+                anomalyFocus={anomalyFocus}
+                onAnomalyFocusCleared={() => setAnomalyFocus(null)}
               />
 
               {/* Station Quick Cards Carousel */}
@@ -183,6 +199,15 @@ export const App: React.FC = () => {
             </div>
           )}
 
+          {selectedTab === "mappls" && (
+            <MapplsView
+              stations={stations}
+              fires={fires}
+              trajectories={trajectories}
+              currentPoint={currentPoint}
+            />
+          )}
+
           {selectedTab === "sounding" && (
             <InversionSoundingView sounding={sounding} />
           )}
@@ -197,6 +222,15 @@ export const App: React.FC = () => {
 
           {selectedTab === "grap" && (
             <GRAPAdvisorView grap={grap} />
+          )}
+
+          {selectedTab === "anomalies" && (
+            <IndustrialAnomaliesView
+              onViewOnMap={(focus) => {
+                setAnomalyFocus(focus);
+                setSelectedTab("map");
+              }}
+            />
           )}
         </div>
       </main>

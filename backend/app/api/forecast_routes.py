@@ -59,4 +59,24 @@ async def refresh_forecast():
     points, feedback = await build_72h_forecast_dataset()
     _cache["forecast"] = points
     _cache["feedback"] = feedback
+    # clear cams and wind cache too if needed
+    _cache.pop("cams", None)
+    _cache.pop("wind_grid", None)
     return {"status": "success", "message": "Forecast dataset refreshed successfully"}
+
+@router.get("/cams")
+async def get_cams_assimilation_data():
+    """Returns satellite-assimilated atmospheric composition products."""
+    if "cams" not in _cache:
+        from ..services.cams_assimilation import fetch_cams_satellite_products
+        _cache["cams"] = await fetch_cams_satellite_products()
+    return _cache["cams"]
+
+@router.get("/wind-grid")
+async def get_wind_field_grid():
+    """Returns spatial wind vector grid for animated flow particles."""
+    if "wind_grid" not in _cache:
+        from ..services.cams_assimilation import fetch_wind_field_grid
+        _cache["wind_grid"] = await fetch_wind_field_grid()
+    return _cache["wind_grid"]
+

@@ -6,6 +6,8 @@ from .api.inversion_routes import router as inversion_router
 from .api.plume_routes import router as plume_router
 from .api.grap_routes import router as grap_router
 from .api.simulation_routes import router as simulation_router
+from .api.carto_routes import router as carto_router
+from .api.anomaly_routes import router as anomaly_router
 
 app = FastAPI(
     title="DELHI-AIR-COUPLED API",
@@ -29,6 +31,8 @@ app.include_router(inversion_router)
 app.include_router(plume_router)
 app.include_router(grap_router)
 app.include_router(simulation_router)
+app.include_router(carto_router)
+app.include_router(anomaly_router)
 
 @app.get("/")
 async def root():
@@ -49,6 +53,7 @@ async def root():
             "stubble_fires": "/api/plume/fires",
             "plume_trajectories": "/api/plume/trajectories",
             "grap_status": "/api/grap/status",
-            "policy_simulation": "/api/simulation/run"
+            "policy_simulation": "/api/simulation/run",
+            "industrial_anomalies": "/api/anomalies/current"
         }
     }
