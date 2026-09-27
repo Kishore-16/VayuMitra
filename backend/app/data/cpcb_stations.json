@@ -1,0 +1,342 @@
+[
+  {
+    "id": "DL001",
+    "name": "Anand Vihar, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6476,
+    "lon": 77.3158,
+    "type": "Hotspot - Industrial & Interstate Bus Terminal",
+    "base_emission_factor": 1.45
+  },
+  {
+    "id": "DL002",
+    "name": "Punjabi Bagh, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6740,
+    "lon": 77.1310,
+    "type": "Residential & Heavy Traffic Corridor",
+    "base_emission_factor": 1.25
+  },
+  {
+    "id": "DL003",
+    "name": "R K Puram, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5632,
+    "lon": 77.1869,
+    "type": "Residential & Institutional",
+    "base_emission_factor": 1.10
+  },
+  {
+    "id": "DL004",
+    "name": "IGI Airport (T3), Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5562,
+    "lon": 77.1000,
+    "type": "Airport & Aviation Corridor",
+    "base_emission_factor": 0.95
+  },
+  {
+    "id": "DL005",
+    "name": "Bawana, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.7762,
+    "lon": 77.0511,
+    "type": "Hotspot - Industrial Area",
+    "base_emission_factor": 1.50
+  },
+  {
+    "id": "DL006",
+    "name": "Mundka, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6836,
+    "lon": 77.0270,
+    "type": "Hotspot - Industrial & Commercial",
+    "base_emission_factor": 1.48
+  },
+  {
+    "id": "DL007",
+    "name": "Wazirpur, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6998,
+    "lon": 77.1654,
+    "type": "Hotspot - Industrial Area",
+    "base_emission_factor": 1.42
+  },
+  {
+    "id": "DL008",
+    "name": "Jahangirpuri, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.7328,
+    "lon": 77.1706,
+    "type": "Hotspot - Dense Residential & Highway",
+    "base_emission_factor": 1.40
+  },
+  {
+    "id": "DL009",
+    "name": "Dwarka-Sector 8, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5710,
+    "lon": 77.0673,
+    "type": "Residential",
+    "base_emission_factor": 1.05
+  },
+  {
+    "id": "DL010",
+    "name": "Rohini, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.7325,
+    "lon": 77.1199,
+    "type": "Hotspot - Residential & Commercial",
+    "base_emission_factor": 1.35
+  },
+  {
+    "id": "DL011",
+    "name": "Okhla Phase-2, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5308,
+    "lon": 77.2713,
+    "type": "Hotspot - Industrial & Waste-to-Energy",
+    "base_emission_factor": 1.38
+  },
+  {
+    "id": "DL012",
+    "name": "ITO, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6289,
+    "lon": 77.2410,
+    "type": "Heavy Commercial Traffic Junction",
+    "base_emission_factor": 1.28
+  },
+  {
+    "id": "DL013",
+    "name": "Mandir Marg, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6365,
+    "lon": 77.2011,
+    "type": "Central Urban Green Belt",
+    "base_emission_factor": 0.90
+  },
+  {
+    "id": "DL014",
+    "name": "Lodhi Road, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5883,
+    "lon": 77.2217,
+    "type": "Institutional & Green Background",
+    "base_emission_factor": 0.88
+  },
+  {
+    "id": "DL015",
+    "name": "Shadipur, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6515,
+    "lon": 77.1581,
+    "type": "Industrial & Railway Yard",
+    "base_emission_factor": 1.30
+  },
+  {
+    "id": "DL016",
+    "name": "Siri Fort, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.5504,
+    "lon": 77.2159,
+    "type": "Residential & Sports Complex",
+    "base_emission_factor": 0.92
+  },
+  {
+    "id": "DL017",
+    "name": "Major Dhyan Chand Stadium, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6119,
+    "lon": 77.2378,
+    "type": "Central Administrative Zone",
+    "base_emission_factor": 0.94
+  },
+  {
+    "id": "DL018",
+    "name": "Narela, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.8526,
+    "lon": 77.0931,
+    "type": "Hotspot - Border Industrial Zone",
+    "base_emission_factor": 1.45
+  },
+  {
+    "id": "DL019",
+    "name": "Patparganj, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6237,
+    "lon": 77.2872,
+    "type": "Industrial & High Density Urban",
+    "base_emission_factor": 1.26
+  },
+  {
+    "id": "DL020",
+    "name": "Ashok Vihar, Delhi",
+    "city": "Delhi",
+    "state": "Delhi",
+    "lat": 28.6954,
+    "lon": 77.1817,
+    "type": "Hotspot - Residential & Ring Road",
+    "base_emission_factor": 1.32
+  },
+  {
+    "id": "UP001",
+    "name": "Sector-62, Noida",
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "lat": 28.6245,
+    "lon": 77.3638,
+    "type": "IT Hub & Institutional",
+    "base_emission_factor": 1.15
+  },
+  {
+    "id": "UP002",
+    "name": "Sector-1, Noida",
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "lat": 28.5898,
+    "lon": 77.3101,
+    "type": "Industrial & Border Transit",
+    "base_emission_factor": 1.22
+  },
+  {
+    "id": "UP003",
+    "name": "Knowledge Park III, Greater Noida",
+    "city": "Greater Noida",
+    "state": "Uttar Pradesh",
+    "lat": 28.4720,
+    "lon": 77.4820,
+    "type": "Educational Hub & Semi-Urban",
+    "base_emission_factor": 1.08
+  },
+  {
+    "id": "UP004",
+    "name": "Vasundhara, Ghaziabad",
+    "city": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "lat": 28.6603,
+    "lon": 77.3573,
+    "type": "Hotspot - Dense Residential & Highway",
+    "base_emission_factor": 1.38
+  },
+  {
+    "id": "UP005",
+    "name": "Indirapuram, Ghaziabad",
+    "city": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "lat": 28.6468,
+    "lon": 77.3712,
+    "type": "Dense Residential & Commercial",
+    "base_emission_factor": 1.32
+  },
+  {
+    "id": "UP006",
+    "name": "Loni, Ghaziabad",
+    "city": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "lat": 28.7501,
+    "lon": 77.2890,
+    "type": "Hotspot - Unorganized Industrial & Stubble Entry",
+    "base_emission_factor": 1.55
+  },
+  {
+    "id": "UP007",
+    "name": "Sanjay Nagar, Ghaziabad",
+    "city": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "lat": 28.6854,
+    "lon": 77.4538,
+    "type": "Residential & Highway Junction",
+    "base_emission_factor": 1.28
+  },
+  {
+    "id": "HR001",
+    "name": "Vikas Sadan, Gurugram",
+    "city": "Gurugram",
+    "state": "Haryana",
+    "lat": 28.4501,
+    "lon": 77.0264,
+    "type": "Administrative & Traffic Node",
+    "base_emission_factor": 1.20
+  },
+  {
+    "id": "HR002",
+    "name": "Sector-51, Gurugram",
+    "city": "Gurugram",
+    "state": "Haryana",
+    "lat": 28.4229,
+    "lon": 77.0697,
+    "type": "Hotspot - Construction & High Density",
+    "base_emission_factor": 1.30
+  },
+  {
+    "id": "HR003",
+    "name": "TERI Gram, Gurugram",
+    "city": "Gurugram",
+    "state": "Haryana",
+    "lat": 28.4277,
+    "lon": 77.1472,
+    "type": "Ecological & Rural Background",
+    "base_emission_factor": 0.85
+  },
+  {
+    "id": "HR004",
+    "name": "Sector-16A, Faridabad",
+    "city": "Faridabad",
+    "state": "Haryana",
+    "lat": 28.4088,
+    "lon": 77.3178,
+    "type": "Commercial & Residential",
+    "base_emission_factor": 1.24
+  },
+  {
+    "id": "HR005",
+    "name": "New Industrial Town (NIT), Faridabad",
+    "city": "Faridabad",
+    "state": "Haryana",
+    "lat": 28.3882,
+    "lon": 77.3005,
+    "type": "Hotspot - Heavy Manufacturing & Industrial",
+    "base_emission_factor": 1.44
+  },
+  {
+    "id": "HR006",
+    "name": "Murthal, Sonipat",
+    "city": "Sonipat",
+    "state": "Haryana",
+    "lat": 29.0267,
+    "lon": 77.0700,
+    "type": "NH-44 Highway Corridor & Stubble Gateway",
+    "base_emission_factor": 1.36
+  },
+  {
+    "id": "HR007",
+    "name": "Bahadurgarh, Jhajjar",
+    "city": "Bahadurgarh",
+    "state": "Haryana",
+    "lat": 28.6925,
+    "lon": 76.9240,
+    "type": "Industrial & Western NCR Entry Point",
+    "base_emission_factor": 1.34
+  }
+]
