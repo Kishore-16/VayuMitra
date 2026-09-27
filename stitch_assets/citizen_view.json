@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb\",\"title\":\"Public Citizen View - AeroSense Delhi\",\"screenshot\":{\"name\":\"projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AEtjO1XjgrjiAxuyI8yODQNLLQvo3O5TtSPymP10OTKfqapTFiUIJiN1e40Kp2VvQrcTqdCP93R3qDm0clSTYGG0yI_v2BIkonL234q8XgM2oJ5t_pHW7up2tYrx6efq77qlnAUDY3Nk974JiktiwQnoSTdew9WFYr0bZusUP-DYwg7dl4GrAYpC-oKGlrflY6o7DErCFviD02-GrOeWmtNu4xU5m1DRLiXEQ_IbnayT5sBVdVBJDZEHhmzUqw\"},\"htmlCode\":{\"name\":\"projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTk1MjVjNDAwMmE5YjRkZTJjMDVjMTZiEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4814\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "4814",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTk1MjVjNDAwMmE5YjRkZTJjMDVjMTZiEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb/fileEntries/html"
+      },
+      "name": "projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1XjgrjiAxuyI8yODQNLLQvo3O5TtSPymP10OTKfqapTFiUIJiN1e40Kp2VvQrcTqdCP93R3qDm0clSTYGG0yI_v2BIkonL234q8XgM2oJ5t_pHW7up2tYrx6efq77qlnAUDY3Nk974JiktiwQnoSTdew9WFYr0bZusUP-DYwg7dl4GrAYpC-oKGlrflY6o7DErCFviD02-GrOeWmtNu4xU5m1DRLiXEQ_IbnayT5sBVdVBJDZEHhmzUqw",
+        "name": "projects/828315316391340215/screens/503f1e7a725a45e7a111ea7f9e8024bb/fileEntries/screenshot"
+      },
+      "title": "Public Citizen View - AeroSense Delhi",
+      "width": "2560"
+    }
+  }
+}

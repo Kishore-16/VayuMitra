@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-primary-fixed":"#001a42","inverse-primary":"#005ac2","surface-container-low":"#151b2a","on-secondary":"#00363e","aqi-severe":"#8C1D2B","inverse-surface":"#dce2f6","primary-fixed-dim":"#adc6ff","on-tertiary-fixed":"#102000","surface-container-high":"#232a39","aqi-moderate":"#F4C430","tertiary":"#9bd84a","surface":"#0c1321","outline":"#8c909f","secondary-container":"#00cbe6","aqi-good":"#2E9B4F","on-tertiary-container":"#1b2f00","surface-card":"rgba(255, 255, 255, 0.04)","aqi-very-poor":"#E13B3B","surface-tint":"#adc6ff","secondary-fixed-dim":"#2fd9f4","on-surface-variant":"#c2c6d6","on-secondary-container":"#00515d","on-tertiary":"#203700","primary-fixed":"#d8e2ff","surface-container-highest":"#2e3544","on-tertiary-fixed-variant":"#304f00","on-primary":"#002e6a","text-primary":"#F8FAFC","surface-variant":"#2e3544","error-container":"#93000a","surface-elevated":"rgba(15, 23, 42, 0.75)","on-primary-fixed-variant":"#004395","on-background":"#dce2f6","on-error-container":"#ffdad6","text-secondary":"#94A3B8","secondary":"#5de6ff","primary":"#adc6ff","on-secondary-fixed":"#001f25","text-tertiary":"#64748B","on-surface":"#dce2f6","surface-dim":"#0c1321","on-primary-container":"#00285d","background":"#0c1321","outline-variant":"#424754","aqi-satisfactory":"#8FCB3E","aqi-poor":"#F08C1D","on-error":"#690005","error":"#ffb4ab","tertiary-fixed":"#b6f563","tertiary-container":"#68a00f","primary-container":"#4d8eff","surface-bright":"#323949","tertiary-fixed-dim":"#9bd84a","secondary-fixed":"#a2eeff","inverse-on-surface":"#2a3040","on-secondary-fixed-variant":"#004e5a","surface-container-lowest":"#070e1c","surface-border":"rgba(255, 255, 255, 0.08)","surface-container":"#19202e"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"1rem","space-sm":"0.5rem","margin-desktop":"2rem","gutter-desktop":"1.5rem","space-md":"1rem","margin-tablet":"1.5rem","space-lg":"1.5rem","space-xs":"0.25rem","space-xl":"2.5rem","gutter":"1rem"},"fontFamily":{"metric-display":["JetBrains Mono"],"label-md":["JetBrains Mono"],"headline-xl":["Geist"],"body-sm":["Inter"],"headline-lg":["Geist"],"headline-lg-mobile":["Geist"],"headline-xl-mobile":["Geist"],"metric-display-mobile":["JetBrains Mono"],"headline-sm":["Geist"],"body-md":["Inter"],"headline-md":["Geist"],"label-lg":["JetBrains Mono"],"body-lg":["Inter"],"label-sm":["JetBrains Mono"]},"fontSize":{"metric-display":["3.5rem",{"lineHeight":"3.75rem","letterSpacing":"-0.03em","fontWeight":"700"}],"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.05em","fontWeight":"500"}],"headline-xl":["3rem",{"lineHeight":"3.5rem","letterSpacing":"-0.025em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"headline-lg":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg-mobile":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-xl-mobile":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.02em","fontWeight":"600"}],"metric-display-mobile":["2.5rem",{"lineHeight":"2.75rem","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"500"}],"body-md":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"headline-md":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0.025em","fontWeight":"500"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"label-sm":["0.625rem",{"lineHeight":"0.875rem","letterSpacing":"0.075em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-secondary/20 selection:text-secondary"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-max"><div class="flex items-center gap-space-sm"><img alt="AeroSense Delhi Brand Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VegG200tQzhckebmpEzRvlQCZL855mA3a8Dc4i3VcvGORz8RJK868qQKwKRinSr0kaxpOJZN_o9uonvc0-8Zcrg4_eUwDJz34etvIz2L4UiK23o8EIu1IZNodIMjhM6XquTHhwA_xvdYp0q4rdl2a6lu_j3FVPLGrZCHDOCP96FQcixWxkw4vr25WeuGCl9OSoTvDHXjParXEe9RbwgQ8h52nWvLHZGxWkXyQD1VHiY-Q3rXceqFrtTA"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight font-semibold">AeroSense</span><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-primary-container/20 text-secondary uppercase font-medium">Delhi NCR</span></div><div class="flex items-center gap-1.5"><div class="flex h-1 w-3 rounded-full overflow-hidden"><span class="w-1/3 bg-[#FF9933]"></span><span class="w-1/3 bg-white"></span><span class="w-1/3 bg-[#138808]"></span></div><span class="font-label-sm text-label-sm text-text-tertiary">MoES · CPCB Coupled System</span></div></div></div></div><nav class="hidden xl:flex items-center p-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md" data-active-classes="bg-primary-container text-on-primary font-medium shadow-sm"><a class="px-space-md py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="public-citizen-view" href="#">Public Citizen View</a><a aria-current="page" class="px-space-md py-1.5 rounded-full transition-all bg-primary-container text-on-primary font-medium shadow-sm" data-path="official-command-center" href="#">Official Command Center</a><a class="px-space-md py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="plume-and-inversion-lab" href="#">Plume & Inversion Lab</a><a class="px-space-md py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="grap-action-center" href="#">GRAP Action Center</a><a class="px-space-md py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="data-health-admin" href="#">Data Health (Admin)</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-low"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-label-sm text-label-sm text-text-secondary">Model Run: 06:00 UTC · LIVE CPCB/IMD Feed</span></div><div class="flex items-center gap-space-xs"><button class="px-2 py-1 rounded font-label-sm text-label-sm text-text-secondary hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Language Switcher" type="button">EN | हिं</button><button class="p-1.5 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-base">dark_mode</span></button></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden 2xl:block"><p class="font-body-sm text-body-sm font-medium text-text-primary leading-tight">Dr. Raman Sharma</p><p class="font-label-sm text-label-sm text-text-tertiary leading-tight">Lead Atmospheric Modeler</p></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_8GGtrqJ00nrWxRljH22n98ZBGLPf9RB44EJ4tb4wxR8XIBYKwIF37yuXROeoHtqTE8DF_Wn95cKWYxIzkTAeqeHTEkQfiIqBE-F-MGS8WO83Q4qr9xFGDrzpKrhCqwz14O2sNKTCdsfTCLV7aszERKUibB5tN8GsJyWbyWNiE7_7a-cFTRxXUHrsnSKF0Mkcw4bDPw17hbh3Gqp94sUP6McNbinaUE6dy1YyK16iRor48s7YZEA"/></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-lowest/90 backdrop-blur-xl z-40 flex flex-col justify-between py-space-md"><div class="flex flex-col gap-space-xs px-space-sm"><div class="px-space-sm py-space-xs"><span class="font-label-sm text-label-sm uppercase tracking-wider text-text-tertiary font-semibold">Meteorological Rails</span></div><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-medium rounded-xl shadow-[0_0_12px_rgba(77,142,255,0.25)]"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 transition-all group bg-primary-container text-on-primary font-medium rounded-xl shadow-[0_0_12px_rgba(77,142,255,0.25)]" data-path="official-command-center" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">dashboard</span><span class="font-body-md text-body-md">Command Center</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="forecast-detail" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">timeline</span><span class="font-body-md text-body-md">72h Forecast Detail</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="inversion-and-boundary-layer" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">layers</span><span class="font-body-md text-body-md">Inversion & Boundary</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="plume-tracker" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">air</span><span class="font-body-md text-body-md">Stubble Plume Tracker</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="explainability-engine" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">schema</span><span class="font-body-md text-body-md">Explainability (Cause→Effect)</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="grap-action-center" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">warning</span><span class="font-body-md text-body-md">GRAP Action & Alerts</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="zone-comparison" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">compare</span><span class="font-body-md text-body-md">Zone Comparison</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="data-health-admin" href="#"><span class="material-symbols-outlined text-lg text-secondary group-hover:text-primary transition-colors">vital_signs</span><span class="font-body-md text-body-md">System Health & Sources</span></a></nav></div><div class="px-space-md py-space-sm mx-space-sm rounded-xl bg-surface-container-high/60 backdrop-blur-md"><div class="flex items-center justify-between text-text-tertiary mb-1"><span class="font-label-sm text-label-sm uppercase">IMD Ensemble 4km</span><span class="font-label-sm text-label-sm text-tertiary">Synchronized</span></div><div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden"><div class="bg-secondary h-full w-[94%]"></div></div></div></aside><div class="pl-64"><main class="relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-space-md lg:px-margin-desktop py-space-md flex flex-col gap-space-lg">
+<!-- SUB-NAV / CONTEXT HEADER -->
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md p-space-md rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-very-poor/20 text-aqi-very-poor uppercase font-bold tracking-wider">Operational Mode: Active Alert</span>
+<span class="font-label-sm text-label-sm text-text-tertiary">|</span>
+<span class="font-label-sm text-label-sm text-secondary">National Capital Region Coupled Air Quality & Meteorological Command</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-text-primary tracking-tight font-semibold">
+          NCR Tropospheric Situational Command Console
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-secondary text-base">cloud_sync</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary leading-none">Model Run: WRF-Chem v4.4</span>
+<span class="font-label-sm text-label-sm text-tertiary leading-none mt-1">03:00 UTC · 96.4% High Confidence</span>
+</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-high">
+<span class="material-symbols-outlined text-tertiary text-base animate-pulse">sensors</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary leading-none">Telemetry Ingestion</span>
+<span class="font-label-sm text-label-sm text-text-primary leading-none mt-1">40 CPCB + 12 IMD Stations Live</span>
+</div>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm">
+<span class="material-symbols-outlined text-base">picture_as_pdf</span>
+<span>MoES Brief</span>
+</button>
+</div>
+</div>
+<!-- ROW 1: 4 KEY TELEMETRY TILES -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Composite AQI -->
+<div class="relative overflow-hidden p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-aqi-very-poor/10 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-text-tertiary tracking-wider font-semibold">City Composite AQI</span>
+<span class="font-label-sm text-label-sm text-text-secondary">NCR 24-Station Rolling Mean</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-very-poor/25 text-aqi-very-poor font-bold uppercase">Very Poor</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-aqi-very-poor tracking-tight">318</span>
+<span class="font-label-md text-label-md text-text-tertiary">AQI</span>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center text-aqi-very-poor font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+42 pts</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-tertiary">vs 24h prior</span>
+</div>
+</div>
+<!-- 12h mini sparkline -->
+<div class="w-full flex flex-col gap-1">
+<div class="flex justify-between font-label-sm text-label-sm text-text-tertiary">
+<span>12h Trend</span>
+<span class="text-text-secondary font-mono">276 ➔ 318</span>
+</div>
+<svg class="w-full h-8 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 24">
+<defs>
+<lineargradient id="aqiGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#E13B3B" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#E13B3B" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,20 Q12,18 25,17 T50,14 T75,9 T100,3 L100,24 L0,24 Z" fill="url(#aqiGrad)"></path>
+<path d="M0,20 Q12,18 25,17 T50,14 T75,9 T100,3" fill="none" stroke="#E13B3B" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="100" cy="3" fill="#E13B3B" r="3.5"></circle>
+</svg>
+</div>
+</div>
+<!-- PM2.5 Concentration -->
+<div class="relative overflow-hidden p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-aqi-severe/10 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-text-tertiary tracking-wider font-semibold">Fine Particulate PM2.5</span>
+<span class="font-label-sm text-label-sm text-text-secondary">National Standard: 60 µg/m³</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-severe/25 text-aqi-severe font-bold uppercase">Severe Exceedance</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-text-primary tracking-tight">184.2</span>
+<span class="font-label-md text-label-md text-text-tertiary">µg/m³</span>
+</div>
+<span class="font-label-md text-label-md text-aqi-severe font-bold">3.07× Limit</span>
+</div>
+<div class="w-full flex flex-col gap-1.5">
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden flex">
+<div class="h-full bg-aqi-good w-[16%]"></div>
+<div class="h-full bg-aqi-moderate w-[14%]"></div>
+<div class="h-full bg-aqi-poor w-[20%]"></div>
+<div class="h-full bg-aqi-very-poor w-[25%]"></div>
+<div class="h-full bg-aqi-severe w-[25%] relative">
+<span class="absolute right-0 top-0 bottom-0 w-1 bg-text-primary animate-pulse"></span>
+</div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-tertiary">
+<span>0</span>
+<span>60 (Std)</span>
+<span>120</span>
+<span>184.2</span>
+</div>
+</div>
+</div>
+<!-- Planetary Boundary Layer -->
+<div class="relative overflow-hidden p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-secondary/10 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-text-tertiary tracking-wider font-semibold">Boundary Layer (PBL)</span>
+<span class="font-label-sm text-label-sm text-text-secondary">Atmospheric Ventilation Volume</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-very-poor/25 text-aqi-very-poor font-bold uppercase animate-pulse">Trapping Active</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-secondary tracking-tight">380</span>
+<span class="font-label-md text-label-md text-text-tertiary">meters</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md text-aqi-very-poor font-semibold">-68% vs Normal</span>
+<span class="font-label-sm text-label-sm text-text-tertiary">Normal > 1,200m</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-high/70">
+<span class="material-symbols-outlined text-secondary text-base">compress</span>
+<span class="font-body-sm text-body-sm text-text-secondary leading-tight">Tropospheric thermal cap pinning emissions within surface micro-layer.</span>
+</div>
+</div>
+<!-- Stubble Contribution -->
+<div class="relative overflow-hidden p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-aqi-poor/10 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-text-tertiary tracking-wider font-semibold">Stubble Plume Transboundary</span>
+<span class="font-label-sm text-label-sm text-text-secondary">Punjab & Haryana Advection</span>
+</div>
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-poor/25 text-aqi-poor font-bold uppercase">NW Flow</span>
+</div>
+<div class="my-space-sm flex items-baseline justify-between">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-aqi-poor tracking-tight">34.8</span>
+<span class="font-label-md text-label-md text-text-tertiary">%</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Peak ETA: +18h</span>
+<span class="font-label-sm text-label-sm text-text-tertiary">Trajectory Speed: 14 km/h</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-text-tertiary bg-surface-container-high/60 p-2 rounded-lg">
+<div class="flex items-center gap-1.5 text-text-secondary">
+<span class="material-symbols-outlined text-sm text-aqi-poor">local_fire_department</span>
+<span>1,420 Active Hotspots</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">VIIRS Confirmed</span>
+</div>
+</div>
+</div>
+<!-- ROW 2: MAIN WORKSPACE (2/3 NCR SPATIAL MAP + 1/3 INVERSION & COUPLING) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Spatial Map (8 Cols) -->
+<div class="lg:col-span-8 p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md relative min-h-[580px]">
+<!-- Map Control Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">map</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Delhi NCR Atmospheric Wind & Isobaric Field</h3>
+<p class="font-label-sm text-label-sm text-text-tertiary">Real-time coupled sensor topology & WRF-Chem dispersion grid</p>
+</div>
+</div>
+<!-- Overlay Toggle Pills -->
+<div class="flex flex-wrap items-center gap-1.5 bg-surface-container-highest p-1 rounded-lg">
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary text-on-primary font-semibold transition-all shadow-sm">
+              ● AQI Heatmap
+            </button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-bright text-text-secondary transition-all">
+              ● PM2.5 Isobars
+            </button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-bright text-secondary transition-all">
+              ● Vector Winds
+            </button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-high hover:bg-surface-bright text-aqi-poor transition-all">
+              ● Fires (1,420)
+            </button>
+</div>
+</div>
+<!-- Simulated Visual Map Surface -->
+<div class="relative flex-1 rounded-xl overflow-hidden bg-surface-container-lowest flex items-center justify-center min-h-[380px]">
+<!-- Underlay Static Map Pipeline Provider -->
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity filter blur-[0.5px]" data-location="Delhi, India" style=""></div>
+<!-- Atmospheric Dispersion Canvas Simulation (SVG vectors + Isobars) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 800 480">
+<defs>
+<lineargradient id="stubblePlumeGrad" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#F08C1D" stop-opacity="0.55"></stop>
+<stop offset="40%" stop-color="#E13B3B" stop-opacity="0.45"></stop>
+<stop offset="85%" stop-color="#8C1D2B" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#8C1D2B" stop-opacity="0.05"></stop>
+</lineargradient>
+<radialgradient cx="68%" cy="42%" id="hotspotAnandVihar" r="20%">
+<stop offset="0%" stop-color="#8C1D2B" stop-opacity="0.7"></stop>
+<stop offset="60%" stop-color="#E13B3B" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#E13B3B" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="38%" cy="36%" id="hotspotPunjabiBagh" r="22%">
+<stop offset="0%" stop-color="#E13B3B" stop-opacity="0.65"></stop>
+<stop offset="70%" stop-color="#F08C1D" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#F08C1D" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<!-- Plume corridor from NW -->
+<path d="M 0,20 C 180,80 320,160 520,240 S 750,340 800,380 L 800,0 L 0,0 Z" fill="url(#stubblePlumeGrad)"></path>
+<!-- Active Concentric Hotspots -->
+<rect fill="url(#hotspotAnandVihar)" height="480" width="800" x="0" y="0"></rect>
+<rect fill="url(#hotspotPunjabiBagh)" height="480" width="800" x="0" y="0"></rect>
+<!-- Streamlines (Animated Wind Vector Field Simulation) -->
+<g opacity="0.4" stroke="#5de6ff" stroke-dasharray="8 6" stroke-width="1.2">
+<path d="M 20,40 Q 220,110 440,210 T 780,310"></path>
+<path d="M 60,10 Q 260,80 480,180 T 800,280"></path>
+<path d="M 0,90 Q 200,160 420,260 T 760,360"></path>
+<path d="M 10,140 Q 210,210 430,310 T 770,410"></path>
+<path d="M 30,190 Q 230,260 450,360 T 790,460"></path>
+</g>
+<!-- Boundary vector arrows -->
+<g fill="#5de6ff" opacity="0.6">
+<polygon points="240,115 250,119 240,123"></polygon>
+<polygon points="460,217 470,221 460,225"></polygon>
+<polygon points="680,295 690,299 680,303"></polygon>
+<polygon points="320,195 330,199 320,203"></polygon>
+<polygon points="540,295 550,299 540,303"></polygon>
+</g>
+</svg>
+<!-- NCR Station Markers -->
+<div class="relative w-full h-full p-6 flex flex-col justify-between z-10 pointer-events-auto">
+<!-- Northwest Stubble Entry Vector Tag -->
+<div class="self-start px-3 py-1.5 rounded-lg bg-surface-container-high/90 backdrop-blur-md flex items-center gap-2 shadow-md">
+<span class="material-symbols-outlined text-aqi-poor text-base">north_west</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-aqi-poor font-bold">Inflowing Fire Plume (Punjab Corridor)</span>
+<span class="font-label-sm text-label-sm text-text-tertiary">Wind Speed: 3.8 m/s · Azimuth: 312° (NW)</span>
+</div>
+</div>
+<!-- Sensor Node Badges Overlaid spatially -->
+<div class="absolute top-[32%] left-[34%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-aqi-very-poor text-on-primary shadow-lg group-hover:scale-105 transition-all">
+<span class="font-label-sm text-label-sm font-bold">Punjabi Bagh: 365</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-aqi-very-poor mt-0.5"></span>
+</div>
+<div class="absolute top-[38%] left-[64%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-aqi-severe text-on-primary shadow-xl group-hover:scale-110 transition-all ring-2 ring-aqi-severe/50">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+</span>
+<span class="font-label-sm text-label-sm font-bold">Anand Vihar: 410</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-aqi-severe mt-0.5"></span>
+</div>
+<div class="absolute top-[54%] left-[44%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-aqi-very-poor text-on-primary shadow-md group-hover:scale-105 transition-all">
+<span class="font-label-sm text-label-sm font-bold">RK Puram: 312</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-aqi-very-poor mt-0.5"></span>
+</div>
+<div class="absolute top-[48%] left-[72%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-aqi-very-poor text-on-primary shadow-md group-hover:scale-105 transition-all">
+<span class="font-label-sm text-label-sm font-bold">Noida Sec-62: 328</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-aqi-very-poor mt-0.5"></span>
+</div>
+<div class="absolute top-[68%] left-[32%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-aqi-poor text-on-primary shadow-md group-hover:scale-105 transition-all">
+<span class="font-label-sm text-label-sm font-bold">Gurugram Vikas Sadan: 294</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-aqi-poor mt-0.5"></span>
+</div>
+<div class="absolute top-[58%] left-[22%] flex flex-col items-center group cursor-pointer">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-aqi-poor text-on-primary shadow-md group-hover:scale-105 transition-all">
+<span class="font-label-sm text-label-sm font-bold">Dwarka Sec-8: 280</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-aqi-poor mt-0.5"></span>
+</div>
+<!-- Floating Dynamic CPCB Spectrum Legend (Top-Right Map) -->
+<div class="self-end px-3 py-2 rounded-lg bg-surface-container-high/90 backdrop-blur-md shadow-md flex flex-col gap-1 w-56">
+<span class="font-label-sm text-label-sm text-text-secondary font-semibold uppercase">CPCB Category Spectrum</span>
+<div class="flex h-2 rounded overflow-hidden">
+<span class="flex-1 bg-aqi-good" title="Good (0-50)"></span>
+<span class="flex-1 bg-aqi-satisfactory" title="Satisfactory (51-100)"></span>
+<span class="flex-1 bg-aqi-moderate" title="Moderate (101-200)"></span>
+<span class="flex-1 bg-aqi-poor" title="Poor (201-300)"></span>
+<span class="flex-1 bg-aqi-very-poor" title="Very Poor (301-400)"></span>
+<span class="flex-1 bg-aqi-severe" title="Severe (401-500)"></span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-tertiary">
+<span>0</span>
+<span>100</span>
+<span>200</span>
+<span>300</span>
+<span>400+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Timeline Scrubber Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm p-space-sm rounded-lg bg-surface-container-high/80">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">schedule</span>
+<span class="font-label-sm text-label-sm text-text-secondary font-medium">Trajectory Prediction Timeline:</span>
+</div>
+<div class="flex items-center gap-1.5 w-full sm:w-auto">
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-primary text-on-primary font-bold">Now (00h)</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest hover:bg-surface-bright text-text-secondary transition-colors">+06h</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest hover:bg-surface-bright text-text-secondary transition-colors">+12h</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest hover:bg-surface-bright text-aqi-very-poor font-semibold transition-colors">+24h</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest hover:bg-surface-bright text-aqi-severe font-semibold transition-colors">+48h</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest hover:bg-surface-bright text-text-secondary transition-colors">+72h</button>
+</div>
+<button class="flex items-center gap-1 font-label-sm text-label-sm text-secondary hover:text-text-primary">
+<span class="material-symbols-outlined text-base">play_arrow</span>
+<span>Loop 72h</span>
+</button>
+</div>
+</div>
+<!-- Inversion Strength & Two-Way Coupling Panel (4 Cols) -->
+<div class="lg:col-span-4 p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary">layers</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Inversion Strength & Coupling</h3>
+</div>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-secondary">LID ACTIVE</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary">
+            Tropospheric thermal stratification locking pollutants in the surface boundary layer.
+          </p>
+</div>
+<!-- Semi-circular Radial ISI Gauge -->
+<div class="flex flex-col items-center justify-center relative p-space-sm bg-surface-container-lowest rounded-xl">
+<svg class="w-48 h-28 overflow-visible" viewbox="0 0 200 110">
+<!-- Background Arc -->
+<path d="M 20,100 A 80,80 0 0,1 180,100" fill="none" stroke="#232a39" stroke-linecap="round" stroke-width="16"></path>
+<!-- Filled Value Arc (7.8 / 10 = 78% of 180 deg = 140.4 deg) -->
+<path d="M 20,100 A 80,80 0 0,1 168,52" fill="none" stroke="#E13B3B" stroke-linecap="round" stroke-width="16"></path>
+<!-- Needle / Marker Pip -->
+<circle cx="168" cy="52" fill="#FFFFFF" r="5"></circle>
+</svg>
+<div class="flex flex-col items-center -mt-8">
+<div class="flex items-baseline gap-1">
+<span class="font-metric-display text-metric-display text-text-primary">7.8</span>
+<span class="font-label-md text-label-md text-text-tertiary">/ 10</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase font-bold text-aqi-very-poor tracking-wider">High Inversion Lid</span>
+<span class="font-label-sm text-label-sm text-text-tertiary">ΔT = +4.6°C across 300m</span>
+</div>
+</div>
+<!-- Glowing Connector / Multiplier Box -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/90 flex flex-col gap-1.5 shadow-sm">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-base">all_inclusive</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase">Two-Way Coupling Dynamics</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary leading-snug">
+            Dropping PBL (<span class="text-secondary font-mono">380m</span>) + Calm Winds (<1.5 m/s) ➔ Multiplies Surface PM2.5 by <span class="text-aqi-very-poor font-bold font-mono text-base">2.4×</span>.
+          </p>
+<span class="font-label-sm text-label-sm text-text-tertiary">Aerosol feedback weakens diurnal solar heating, reinforcing inversion trap.</span>
+</div>
+<!-- 72h Mini Correlation Line Chart -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<div class="flex items-center gap-1 text-secondary">
+<span class="w-2.5 h-0.5 bg-secondary"></span>
+<span>Temp Inversion (ΔT)</span>
+</div>
+<div class="flex items-center gap-1 text-aqi-very-poor">
+<span class="w-2.5 h-0.5 bg-aqi-very-poor"></span>
+<span>Surface AQI Response</span>
+</div>
+</div>
+<div class="h-20 w-full bg-surface-container-lowest rounded-lg p-2 flex items-center">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 40">
+<!-- Inversion curve (Cyan) -->
+<path d="M0,32 Q15,30 30,22 T60,8 T80,14 T100,6" fill="none" stroke="#5de6ff" stroke-width="2"></path>
+<!-- AQI response curve (Red) with subtle lag -->
+<path d="M0,36 Q18,34 35,26 T65,11 T85,12 T100,4" fill="none" stroke="#E13B3B" stroke-dasharray="3 2" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-text-tertiary">
+<span>Now</span>
+<span>+24h</span>
+<span>+48h</span>
+<span>+72h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 3: 72-HOUR COUPLED FORECAST CHART (FULL WIDTH) -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">insights</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">72-Hour Coupled Air Quality Forecast & GRAP Threshold Trajectory</h3>
+<p class="font-label-sm text-label-sm text-text-tertiary">Coupled Eulerian Dispersion Model · Ensemble Mean with 90% Confidence Interval</p>
+</div>
+</div>
+<!-- Series Legend -->
+<div class="flex flex-wrap items-center gap-space-md font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-aqi-very-poor"></span>
+<span class="text-text-primary font-medium">PM2.5 Trajectory</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-aqi-poor"></span>
+<span class="text-text-secondary">PM10 Coarse</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 rounded-full bg-secondary"></span>
+<span class="text-text-secondary">Surface Ozone (O₃)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-2 rounded bg-aqi-very-poor/20"></span>
+<span class="text-text-tertiary">Ensemble Spread (±18%)</span>
+</div>
+</div>
+</div>
+<!-- The Multi-Series Forecast Graph Container -->
+<div class="relative w-full h-80 rounded-xl bg-surface-container-lowest p-space-md overflow-hidden flex flex-col justify-between">
+<!-- Background GRAP Threshold Band Reference Lines -->
+<div class="absolute inset-0 px-space-md py-6 flex flex-col justify-between pointer-events-none">
+<!-- Stage IV Line (450+) -->
+<div class="w-full flex items-center justify-between">
+<div class="w-full h-[1px] bg-aqi-severe/30 border-dashed"></div>
+<span class="pl-2 font-label-sm text-label-sm text-aqi-severe uppercase font-mono font-bold whitespace-nowrap">Stage IV (450+)</span>
+</div>
+<!-- Stage III Line (401) -->
+<div class="w-full flex items-center justify-between">
+<div class="w-full h-[1px] bg-aqi-very-poor/40 border-dashed"></div>
+<span class="pl-2 font-label-sm text-label-sm text-aqi-very-poor uppercase font-mono font-bold whitespace-nowrap">Stage III (401 Severe)</span>
+</div>
+<!-- Stage II Line (301) -->
+<div class="w-full flex items-center justify-between">
+<div class="w-full h-[1px] bg-aqi-poor/40 border-dashed"></div>
+<span class="pl-2 font-label-sm text-label-sm text-aqi-poor uppercase font-mono font-bold whitespace-nowrap">Stage II (301 Very Poor)</span>
+</div>
+<!-- Stage I Line (201) -->
+<div class="w-full flex items-center justify-between">
+<div class="w-full h-[1px] bg-aqi-moderate/30 border-dashed"></div>
+<span class="pl-2 font-label-sm text-label-sm text-aqi-moderate uppercase font-mono font-bold whitespace-nowrap">Stage I (201 Poor)</span>
+</div>
+<!-- Baseline Standard (60) -->
+<div class="w-full flex items-center justify-between">
+<div class="w-full h-[1px] bg-aqi-good/20"></div>
+<span class="pl-2 font-label-sm text-label-sm text-aqi-good uppercase font-mono whitespace-nowrap">Standard (60)</span>
+</div>
+</div>
+<!-- Rendered Vector Chart -->
+<svg class="absolute inset-0 w-full h-full px-space-md py-6 overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 260">
+<defs>
+<lineargradient id="pm25Spread" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#E13B3B" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#E13B3B" stop-opacity="0.02"></stop>
+</lineargradient>
+<lineargradient id="peakHighlight" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#E13B3B"></stop>
+<stop offset="50%" stop-color="#8C1D2B"></stop>
+<stop offset="100%" stop-color="#E13B3B"></stop>
+</lineargradient>
+</defs>
+<!-- 90% Confidence Band Polygon -->
+<polygon fill="url(#pm25Spread)" points="
+            0,140 125,130 250,110 375,65 500,35 625,60 750,90 875,120 1000,135
+            1000,165 875,150 750,130 625,100 500,75 375,105 250,140 125,155 0,165"></polygon>
+<!-- Ozone O3 Line (Cyan) -->
+<path d="M 0,210 C 150,215 300,190 450,185 C 600,180 750,200 1000,195" fill="none" opacity="0.75" stroke="#5de6ff" stroke-dasharray="4 4" stroke-width="2"></path>
+<!-- PM10 Coarse Line (Orange) -->
+<path d="M 0,160 C 130,150 260,130 380,95 C 500,60 620,85 750,110 C 880,130 1000,145" fill="none" stroke="#F08C1D" stroke-width="2.5"></path>
+<!-- Main PM2.5 Trajectory (Red -> Severe Crimson) -->
+<path d="M 0,150 C 125,142 250,122 375,85 C 500,48 625,78 750,108 C 875,135 1000,150" fill="none" stroke="url(#peakHighlight)" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Peak Marker at +36h (AQI 425+) -->
+<g transform="translate(500, 48)">
+<circle cx="0" cy="0" fill="#8C1D2B" r="6" stroke="#FFFFFF" stroke-width="2"></circle>
+<!-- Callout Pin -->
+<line stroke="#8C1D2B" stroke-width="1.5" x1="0" x2="0" y1="0" y2="-24"></line>
+<rect fill="#8C1D2B" height="22" rx="4" width="130" x="-65" y="-46"></rect>
+<text fill="#FFFFFF" font-family="JetBrains Mono" font-size="11" font-weight="bold" text-anchor="middle" x="0" y="-31">
+              Peak: 428 AQI (+36h)
+            </text>
+</g>
+<!-- Current Time Marker (00h) -->
+<g transform="translate(0, 150)">
+<circle cx="0" cy="0" fill="#E13B3B" r="4"></circle>
+</g>
+</svg>
+<!-- Dynamic Forecast Time Steps (X-Axis labels) -->
+<div class="relative z-10 flex justify-between font-label-sm text-label-sm text-text-tertiary pt-2 border-t-0">
+<div class="flex flex-col"><span class="text-text-primary font-bold">Now</span><span>03:00 UTC</span></div>
+<div class="flex flex-col text-center"><span>+09h</span><span>12:00</span></div>
+<div class="flex flex-col text-center"><span>+18h</span><span>21:00</span></div>
+<div class="flex flex-col text-center"><span class="text-aqi-poor font-semibold">+27h</span><span>06:00 (+1)</span></div>
+<div class="flex flex-col text-center"><span class="text-aqi-severe font-bold">+36h (CRITICAL PEAK)</span><span class="text-aqi-severe">15:00 (+1)</span></div>
+<div class="flex flex-col text-center"><span>+45h</span><span>00:00 (+2)</span></div>
+<div class="flex flex-col text-center"><span>+54h</span><span>09:00 (+2)</span></div>
+<div class="flex flex-col text-center"><span>+63h</span><span>18:00 (+2)</span></div>
+<div class="flex flex-col text-right"><span>+72h</span><span>03:00 (+3)</span></div>
+</div>
+</div>
+</div>
+<!-- ROW 4: GRAP EARLY WARNING & ACTION ADVISORY BANNER -->
+<div class="relative overflow-hidden p-space-md lg:p-space-lg rounded-xl bg-aqi-very-poor/15 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<!-- Pulsing Emergency Indicator & Warning Content -->
+<div class="flex items-start gap-space-md max-w-4xl">
+<div class="p-3 rounded-xl bg-aqi-very-poor text-on-primary shadow-lg flex-shrink-0">
+<span class="material-symbols-outlined text-2xl animate-bounce">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-aqi-very-poor text-on-primary font-bold uppercase tracking-wider">
+              GRAP Stage III Imminent Warning
+            </span>
+<span class="font-label-sm text-label-sm text-aqi-very-poor font-mono font-bold">Lead Time: 32 Hours Ahead</span>
+</div>
+<p class="font-body-md text-body-md text-text-primary leading-relaxed">
+            Forecast models project composite AQI breaching <strong class="text-aqi-severe font-bold">400 (Severe category)</strong> within 32 hours due to synchronized transboundary crop stubble advection combined with overnight boundary layer suppression (<300m). Immediate Stage III readiness protocol enforcement advised.
+          </p>
+<p class="font-label-sm text-label-sm text-text-secondary mt-1">
+            Mandated Interventions: Strict ban on BS-III Petrol & BS-IV Diesel 4-wheelers · Cessation of non-essential construction and demolition · Shutdown of stone crushers and hot mix plants across NCR.
+          </p>
+</div>
+</div>
+<!-- Action Operations Trigger Buttons -->
+<div class="flex flex-wrap lg:flex-col items-stretch gap-2 w-full lg:w-64 flex-shrink-0">
+<button class="flex-1 py-2 px-4 rounded-lg bg-aqi-very-poor hover:bg-aqi-severe text-on-primary font-label-md text-label-md font-bold transition-all shadow-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span>Approve Advisory Dispatch</span>
+</button>
+<button class="flex-1 py-2 px-4 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-md text-label-md transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">send</span>
+<span>Notify CAQM Panel</span>
+</button>
+<button class="flex-1 py-1.5 px-3 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-secondary font-label-sm text-label-sm transition-all flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Download MoES Model Brief</span>
+</button>
+</div>
+</div>
+<!-- ROW 5: CAUSAL EXPLAINER & REAL-TIME HOTSPOT SENSOR STREAM -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Causal Explainer Snapshot (7 Cols) -->
+<div class="lg:col-span-7 p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">schema</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Explainability Snapshot (Cause ➔ Effect Chain)</h3>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-mono">Attribution: 94% Solved</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-secondary">
+            Algorithmic decomposition linking primary upstream sources to surface basin entrapment.
+          </p>
+</div>
+<!-- 4-Step Icon Node Chain -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-sm relative">
+<!-- Node 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<span class="p-1.5 rounded-lg bg-aqi-poor/20 text-aqi-poor">
+<span class="material-symbols-outlined text-lg">local_fire_department</span>
+</span>
+<span class="font-label-sm text-label-sm font-bold text-text-tertiary">01</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">Fire Clusters</p>
+<p class="font-body-sm text-body-sm text-text-tertiary leading-tight mt-0.5">1,420 farm fires in Punjab & Haryana emitting ~42 kT PM2.5</p>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<span class="p-1.5 rounded-lg bg-secondary/20 text-secondary">
+<span class="material-symbols-outlined text-lg">air</span>
+</span>
+<span class="font-label-sm text-label-sm font-bold text-text-tertiary">02</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">NW Jet Stream</p>
+<p class="font-body-sm text-body-sm text-text-tertiary leading-tight mt-0.5">North-westerly winds channel transboundary plume into Delhi bowl</p>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<span class="p-1.5 rounded-lg bg-aqi-moderate/20 text-aqi-moderate">
+<span class="material-symbols-outlined text-lg">vertical_align_bottom</span>
+</span>
+<span class="font-label-sm text-label-sm font-bold text-text-tertiary">03</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">Inversion Cap</p>
+<p class="font-body-sm text-body-sm text-text-tertiary leading-tight mt-0.5">Radiational cooling forces lid down to 380m altitude</p>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-2 relative">
+<div class="flex items-center justify-between">
+<span class="p-1.5 rounded-lg bg-aqi-severe/20 text-aqi-severe">
+<span class="material-symbols-outlined text-lg">compress</span>
+</span>
+<span class="font-label-sm text-label-sm font-bold text-text-tertiary">04</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">Basin Trapping</p>
+<p class="font-body-sm text-body-sm text-text-tertiary leading-tight mt-0.5">Calm surface winds (<1.5m/s) lock smog into severe toxicity</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-highest/70 font-label-sm text-label-sm">
+<span class="text-text-secondary">Atmospheric Residence Time: <strong class="text-text-primary font-mono">48-64 Hours</strong></span>
+<button class="text-secondary hover:text-text-primary flex items-center gap-1 font-semibold">
+<span>Explore Full Causal Diagnostics</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Real-Time Hotspot Sensor Stream (5 Cols) -->
+<div class="lg:col-span-5 p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-aqi-very-poor">notification_important</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Critical Station Anomalies</h3>
+</div>
+<span class="font-label-sm text-label-sm text-text-tertiary font-mono">3 Hotspots Flagged</span>
+</div>
+<!-- Hotspot List -->
+<div class="flex flex-col gap-2">
+<!-- Anand Vihar -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center justify-between hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-aqi-severe animate-ping"></span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md text-text-primary font-bold">Anand Vihar (East Delhi)</span>
+<span class="px-1.5 py-0.2 rounded font-label-sm text-label-sm bg-aqi-severe/20 text-aqi-severe font-bold uppercase">Severe</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-tertiary">ISBT Heavy Diesel Advection + Local Dust</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-metric-display-mobile text-metric-display-mobile text-aqi-severe font-mono">418</span>
+<span class="block font-label-sm text-label-sm text-aqi-severe">+14 pts/h</span>
+</div>
+</div>
+<!-- Wazirpur -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center justify-between hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-aqi-very-poor"></span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md text-text-primary font-bold">Wazirpur Industrial Area</span>
+<span class="px-1.5 py-0.2 rounded font-label-sm text-label-sm bg-aqi-very-poor/20 text-aqi-very-poor font-bold uppercase">Very Poor</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-tertiary">Metallic Particulates + Heavy Fuel Residuals</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-metric-display-mobile text-metric-display-mobile text-aqi-very-poor font-mono">398</span>
+<span class="block font-label-sm text-label-sm text-text-tertiary">+6 pts/h</span>
+</div>
+</div>
+<!-- Okhla Phase II -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center justify-between hover:bg-surface-bright transition-colors">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md text-text-primary font-bold">Okhla Phase-II Micro-Sonde</span>
+<span class="px-1.5 py-0.2 rounded font-label-sm text-label-sm bg-secondary/20 text-secondary font-bold uppercase">PBL Collapse</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-tertiary">Boundary layer contracted to 290m AGL</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-metric-display-mobile text-metric-display-mobile text-secondary font-mono">290m</span>
+<span class="block font-label-sm text-label-sm text-text-tertiary">Critical Low</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-secondary font-label-md text-label-md transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-base">format_list_bulleted</span>
+<span>View All 40 Monitoring Stations</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

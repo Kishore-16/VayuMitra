@@ -1,0 +1,12 @@
+{
+  "name": "aerosense-delhi-monorepo",
+  "version": "1.0.0",
+  "description": "AeroSense-Delhi MERN Stack Coupled Weather-Chemistry Forecasting System (SIH #26082)",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "backend": "npm start --prefix backend",
+    "frontend": "npm run dev --prefix frontend",
+    "dev": "node -e \"const { spawn } = require('child_process'); spawn('npm', ['start', '--prefix', 'backend'], { stdio: 'inherit', shell: true }); spawn('npm', ['run', 'dev', '--prefix', 'frontend'], { stdio: 'inherit', shell: true });\"",
+    "start": "node -e \"const { spawn } = require('child_process'); spawn('npm', ['start', '--prefix', 'backend'], { stdio: 'inherit', shell: true }); spawn('npm', ['run', 'dev', '--prefix', 'frontend'], { stdio: 'inherit', shell: true });\""
+  }
+}

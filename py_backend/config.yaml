@@ -1,0 +1,11 @@
+# Data Source Configuration (Adapter Selection)
+data_sources:
+  weather: mock      # mock | imd | era5
+  pollution: mock    # mock | cpcb | safar
+  fire: mock         # mock | viirs
+  satellite: mock    # mock | sentinel5p
+
+model:
+  version: "AeroSense-CoupledSurrogate-v1.0"
+  horizon_hours: 72
+  step_hours: 3

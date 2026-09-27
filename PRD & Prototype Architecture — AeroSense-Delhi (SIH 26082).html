@@ -1,0 +1,854 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}</style><style>:root{color-scheme:light dark;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}}:root[data-theme="dark"]{color-scheme:dark;--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}:root[data-theme="light"]{color-scheme:light}@media print{:root,:root[data-theme="dark"]{color-scheme:light;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}}body{background:var(--md-bg);color:var(--md-text);max-width:720px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:10px;font:14px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;overflow-wrap:break-word}body>:first-child{margin-top:0}h1,h2,h3,h4,h5,h6{margin:6px 0 0;line-height:1.25;font-weight:600;text-wrap:balance}h1{font-size:1.35em}h2{font-size:1.15em;color:var(--md-muted)}h3,h4,h5,h6{font-size:1em}p,ul,ol,blockquote,table,pre,hr{margin:0}strong{font-weight:600}a{color:var(--md-link);text-decoration:none}a:hover{text-decoration:underline}ul,ol{display:flex;flex-direction:column;gap:6px;padding-left:22px}ul{list-style:disc}ol{list-style:decimal}:is(li,td,th)>*+:is(p,ul,ol,blockquote){margin-top:6px}blockquote{display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--md-rule);padding-left:10px;color:var(--md-muted)}:not(pre)>code{background:var(--md-fill);padding:1px 3px;border-radius:4px;font:.92em 'SF Mono',ui-monospace,Menlo,Consolas,monospace}a>code{background:none;color:inherit}pre{background:var(--md-fill);padding:10px 12px;border-radius:6px;overflow-x:auto;font:12px/1.5 'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-block:4px}pre code{background:none;padding:0;font:inherit}table{width:100%;border-collapse:separate;border-spacing:2px;font:inherit}th,td{padding:6px 8px;border-radius:3px;text-align:left;vertical-align:top}th{background:var(--md-fill-strong);font-weight:600}td{background:var(--md-fill)}:is(th,td) :not(pre)>code{background:transparent}hr{border:0;border-top:1px solid var(--md-rule-strong);margin-block:10px}img{max-width:100%;height:auto;border-radius:4px}</style>
+</head><body>
+<h1>Product Requirements Document (PRD)</h1>
+<h2>AeroSense-Delhi: Air Pollution–Weather Coupled Forecasting System (Delhi NCR)</h2>
+<p><strong>SIH Problem Statement #26082 | MoES</strong></p>
+<p><em>Version 1.0 — Prototype &amp; Architecture Blueprint</em></p>
+<hr>
+<h2>1. Executive Summary</h2>
+<p>Delhi NCR's winter pollution crisis is not a &quot;weather problem&quot; or a &quot;pollution problem&quot; in isolation — it is a <strong>coupled physical system</strong>. Cold, calm winter nights create atmospheric inversion layers that trap PM2.5 near the surface; that trapped PM2.5 blocks sunlight, further cools the surface, weakens vertical mixing, and lowers the Planetary Boundary Layer (PBL) — which traps even more pollution. Add regional stubble-burning smoke arriving on specific wind trajectories, and Delhi's AQI can swing from &quot;Moderate&quot; to &quot;Severe&quot; within 24–48 hours.</p>
+<p><strong>AeroSense-Delhi</strong> is a 72-hour, high-resolution, two-way coupled weather-chemistry forecasting system for Delhi NCR, built around a <strong>decision-support dashboard</strong> for MoES/CPCB/GRAP authorities.</p>
+<p>The single most important architectural decision in this PRD — and the one that makes the system realistic to demo at SIH while remaining production-credible — is this:</p>
+<blockquote>
+<p><strong>The prototype runs entirely on a mock/synthetic data layer that is schema-identical to the real data sources (IMD, CPCB, MOSDAC/INSAT-3D, Sentinel-5P, VIIRS/MODIS fire data). All real data ingestion is isolated in one swappable module — the Data Source Adapter Layer — so that going from &quot;demo mode&quot; to &quot;live mode&quot; is a configuration change, not a re-architecture.</strong></p>
+</blockquote>
+<p>This PRD covers: problem framing, users, functional/non-functional requirements, full system architecture, the mock↔real data-swap design (the core engineering insight the team asked for), the prototype's actual build spec, APIs, database schema, tech stack, timeline, risks, and demo strategy.</p>
+<hr>
+<h2>2. Problem Statement (Recap)</h2>
+<p>Traditional AQI forecasting treats meteorology and pollutant dispersion as separate, one-directional pipelines. In Delhi NCR this breaks down because:</p>
+<ul>
+<li><strong>Weather → Pollution:</strong> Wind speed/direction disperses or concentrates pollutants; temperature inversion and low PBL height trap PM2.5/PM10 near the ground; calm winter nights worsen accumulation.</li>
+<li><strong>Pollution → Weather:</strong> Dense aerosol loading blocks solar radiation, cooling the surface, suppressing convective mixing, and further lowering PBL height — a positive feedback loop.</li>
+<li><strong>External shock:</strong> Regional stubble burning (Punjab/Haryana, Oct–Nov) injects large smoke plumes that travel into Delhi NCR depending on wind fields, and get trapped by inversions on arrival.</li>
+</ul>
+<p><strong>Mandatory scope (from the SIH problem statement), which this PRD maps directly to requirements:</strong></p>
+<table>
+<thead>
+<tr>
+<th>SIH Scope Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Coupled weather-chemistry model (WRF-Chem or equivalent, two-way)</td>
+</tr>
+<tr>
+<td>B</td>
+<td>72-hour high-resolution AQI forecast (PM2.5, O₃ priority)</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Atmospheric inversion detection &amp; strength tracking</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Stubble-burning plume tracking (travel, disperse, accumulate, arrival)</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Two-way feedback modelling (Weather↔Pollution, explicit)</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Real-time dashboard (AQI, pollutants, inversion, plume, weather)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>3. Goals &amp; Non-Goals</h2>
+<h3>3.1 Goals (Prototype / SIH stage)</h3>
+<ul>
+<li>Demonstrate the <strong>full decision-support experience</strong> — forecast, inversion tracking, plume tracking, two-way coupling narrative, dashboard, alerts — end-to-end, using a working simplified coupled model.</li>
+<li>Prove the <strong>architecture is real-data-ready</strong>: same interfaces, same schemas, same downstream logic will work unchanged once WRF-Chem / live feeds are available.</li>
+<li>Deliver a <strong>runnable, judge-demoable product</strong> within a hackathon timeline, not a research paper.</li>
+</ul>
+<h3>3.2 Non-Goals (explicitly out of scope for prototype)</h3>
+<ul>
+<li>Running an actual WRF-Chem simulation (requires HPC cluster, days of compute, domain expertise beyond hackathon scope). WRF-Chem is the <strong>target production engine</strong>, represented in the prototype by a lightweight <strong>surrogate coupled model</strong>.</li>
+<li>Full India-wide satellite AQI mapping (that is the <em>ISRO/Bharat Antariksh</em> problem statement's job). AeroSense-Delhi stays <strong>Delhi-NCR-first</strong>; satellite intelligence (AOD, HCHO, fire hotspots) is an <strong>optional enrichment layer</strong>, not the core deliverable — this keeps the project aligned with SIH's actual ask rather than diluting it.</li>
+<li>Real-time SMS/email alert delivery infrastructure at production scale (a stub/logging implementation is sufficient for demo).</li>
+</ul>
+<hr>
+<h2>4. Users &amp; Stakeholders</h2>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Need</th>
+<th>How the product serves them</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MoES / CPCB scientist</strong></td>
+<td>Trust the model, inspect inputs/assumptions</td>
+<td>Transparent module breakdown, confidence scores, explainability panel</td>
+</tr>
+<tr>
+<td><strong>GRAP Committee / Delhi Govt official</strong></td>
+<td>&quot;What action do I take, and when?&quot;</td>
+<td>72-hr AQI trajectory + automated GRAP-stage recommendation + inversion/plume risk index</td>
+</tr>
+<tr>
+<td><strong>District/Zone administrator</strong></td>
+<td>Localized forecast for their zone</td>
+<td>Zone-wise map layers, not just a single city number</td>
+</tr>
+<tr>
+<td><strong>Public / health-sensitive citizens</strong></td>
+<td>Simple health advisory</td>
+<td>Public-facing simplified view (color-coded AQI + advisory text)</td>
+</tr>
+<tr>
+<td><strong>System operator / IT admin</strong></td>
+<td>Keep the system running, swap data sources as they come online</td>
+<td>Config-driven data source toggle, health-check dashboard for each connector</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>5. Scope Definition — Prototype vs Full Deployment</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Prototype (SIH demo)</th>
+<th>Full Production (post-SIH roadmap)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weather data</td>
+<td>Mock generator seeded from real historical IMD/ERA5 statistical patterns for Delhi NCR</td>
+<td>Live IMD AWS/GFS/ERA5/IMDAA feeds</td>
+</tr>
+<tr>
+<td>Pollution data</td>
+<td>Mock generator seeded from real historical CPCB station data</td>
+<td>Live CPCB API (data.gov.in), SAFAR</td>
+</tr>
+<tr>
+<td>Fire/stubble data</td>
+<td>Synthetic fire-event generator with realistic Oct–Nov spike pattern</td>
+<td>VIIRS/MODIS active fire feed</td>
+</tr>
+<tr>
+<td>Satellite (optional)</td>
+<td>Static/sample AOD, HCHO, NO₂ tiles</td>
+<td>Sentinel-5P/TROPOMI, INSAT-3D live</td>
+</tr>
+<tr>
+<td>Core model</td>
+<td>Lightweight two-way coupled surrogate model (physics-informed + statistical)</td>
+<td>WRF-Chem on HPC, nested domains 9→3→1 km</td>
+</tr>
+<tr>
+<td>Data assimilation</td>
+<td>Not implemented (documented as future work)</td>
+<td>3DVar/EnKF blending AOD + surface obs</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>Full-featured web dashboard (all SIH-mandated views)</td>
+<td>Same dashboard, real-data-backed</td>
+</tr>
+<tr>
+<td>Alerts</td>
+<td>In-app + logged/simulated SMS-email</td>
+<td>Real SMS/email/WhatsApp gateway integration</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>6. Functional Requirements</h2>
+<h3>FR-1: Data Ingestion Layer (Adapter Pattern)</h3>
+<p>The system SHALL ingest weather, pollution, and fire-event data through a single internal interface (<code>DataSourceAdapter</code>), regardless of whether the concrete implementation is <code>MockDataAdapter</code> or <code>LiveDataAdapter</code>. See Section 9 for the full contract.</p>
+<h3>FR-2: Coupled Forecasting Engine</h3>
+<p>The system SHALL generate a 72-hour forecast, updated at 3-hour resolution, for:</p>
+<ul>
+<li>PM2.5, PM10, O₃, NOₓ concentrations</li>
+<li>Overall AQI (computed per CPCB's national AQI sub-index formula)</li>
+<li>Temperature, wind speed/direction, PBL height</li>
+</ul>
+<h3>FR-3: Atmospheric Inversion Module</h3>
+<p>The system SHALL compute an <strong>Inversion Strength Index (ISI)</strong> from the vertical temperature profile (or, in mock mode, a synthetic lapse-rate profile) and classify it into Low/Moderate/High/Severe. The ISI SHALL feed into the pollutant-trapping term of the forecasting engine (see Section 11).</p>
+<h3>FR-4: Stubble-Burning Plume Tracker</h3>
+<p>The system SHALL model a plume as a set of point-source emissions (from fire-hotspot data — mock or real) that are advected using a Gaussian/Lagrangian dispersion approximation driven by the wind field, producing a <strong>plume arrival time and PM2.5 contribution estimate</strong> for Delhi NCR.</p>
+<h3>FR-5: Two-Way Feedback Loop</h3>
+<p>The system SHALL implement an explicit feedback step each forecast cycle:</p>
+<ul>
+<li>Weather → Pollution: wind/PBL/inversion modulate dispersion and trapping.</li>
+<li>Pollution → Weather: aerosol optical thickness (derived from PM2.5) reduces a &quot;surface radiation forcing&quot; term, which lowers next-step PBL height / near-surface temperature.</li>
+</ul>
+<h3>FR-6: Real-Time Dashboard</h3>
+<p>The system SHALL display: current AQI, 72-hr AQI forecast chart, pollutant breakdown (PM2.5/PM10/O₃/NOₓ), temperature/wind, PBL height trend, Inversion Strength Index gauge, stubble-plume map with a time slider (Now/+6h/+12h/+24h/+48h/+72h), and a GRAP-stage recommendation banner.</p>
+<h3>FR-7: Explainability Panel (&quot;Cause → Effect&quot;)</h3>
+<p>For any forecasted spike, the system SHALL generate a plain-language explanation, e.g. <em>&quot;AQI is expected to rise to 410 (Severe) in 18 hours because a stubble-burning plume from [region] is moving toward Delhi under weak 6 km/h winds, combined with a strengthening surface inversion (ISI: High).&quot;</em></p>
+<h3>FR-8: Alerts</h3>
+<p>The system SHALL trigger an alert (in-app + logged webhook/email stub) when forecast AQI crosses CPCB/GRAP thresholds (200/300/400/450).</p>
+<h3>FR-9: Data Source Configuration &amp; Health</h3>
+<p>The system SHALL expose an admin view showing, per data type (weather/pollution/fire/satellite), whether it is running in <code>MOCK</code> or <code>LIVE</code> mode, last successful fetch time, and a <strong>one-click/one-config-flag toggle</strong> per source.</p>
+<h3>FR-10 (Stretch): Satellite Intelligence Enrichment</h3>
+<p>If time permits, the system MAY ingest static sample satellite tiles (AOD, HCHO) to enrich the explainability panel with &quot;detected via satellite&quot; source attribution — demonstrating the ISRO-layer synergy without making it the core deliverable.</p>
+<hr>
+<h2>7. Non-Functional Requirements</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Forecast cycle (mock or surrogate model) completes in &lt; 10s for demo responsiveness; dashboard loads in &lt; 2s</td>
+</tr>
+<tr>
+<td><strong>Modularity</strong></td>
+<td>No component may directly import a &quot;mock&quot; or &quot;live&quot; specific class outside the adapter layer — enforced by interface-only imports</td>
+</tr>
+<tr>
+<td><strong>Extensibility</strong></td>
+<td>Adding a new real data source requires writing one adapter class only; zero changes to model/dashboard code</td>
+</tr>
+<tr>
+<td><strong>Offline capability</strong></td>
+<td>Full system (mock mode) runs with zero internet dependency — critical since MoES may require an intranet-deployable tool</td>
+</tr>
+<tr>
+<td><strong>Localization</strong></td>
+<td>UI strings externalized for future Hindi/English bilingual support</td>
+</tr>
+<tr>
+<td><strong>Auditability</strong></td>
+<td>Every forecast run is logged with its input data source mode (mock/live), timestamp, and model version, for reproducibility</td>
+</tr>
+<tr>
+<td><strong>Security (future)</strong></td>
+<td>Live-mode API keys stored in environment/secret manager, never hard-coded</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>8. System Architecture</h2>
+<pre class="mermaid">flowchart TB
+    subgraph EXT[&#34;External Real-World Sources (Phase 2)&#34;]
+        IMD[&#34;IMD / GFS / ERA5 / IMDAA\n(Weather)&#34;]
+        CPCB[&#34;CPCB / SAFAR\n(Ground Pollution)&#34;]
+        FIRE[&#34;VIIRS / MODIS\n(Fire Hotspots)&#34;]
+        SAT[&#34;Sentinel-5P / INSAT-3D\n(Satellite AOD, HCHO) - optional&#34;]
+    end
+
+    subgraph MOCK[&#34;Mock Data Engine (Phase 1 - Prototype)&#34;]
+        MG[&#34;Synthetic Data Generator\n(seeded from historical Delhi NCR patterns)&#34;]
+    end
+
+    subgraph ADAPTER[&#34;Data Source Adapter Layer  ⭐ swap point&#34;]
+        DA[&#34;DataSourceAdapter Interface\n(fetch_weather / fetch_pollution / fetch_fire / fetch_satellite)&#34;]
+        CFG[&#34;Config Toggle\nUSE_MOCK_DATA = true/false (per source)&#34;]
+    end
+
+    subgraph CORE[&#34;Forecasting Core&#34;]
+        ING[&#34;Ingestion &amp; Normalization\n(common schema, NetCDF/JSON)&#34;]
+        INV[&#34;Inversion Detection Module&#34;]
+        PLUME[&#34;Stubble Plume Dispersion Module&#34;]
+        COUPLE[&#34;Two-Way Coupling Engine\n(Surrogate model in prototype /\nWRF-Chem in production)&#34;]
+        AQI[&#34;AQI Computation (CPCB formula)&#34;]
+    end
+
+    subgraph STORE[&#34;Storage&#34;]
+        DB[(&#34;PostgreSQL / TimescaleDB\nForecast + Observations&#34;)]
+    end
+
+    subgraph API[&#34;Backend API (FastAPI)&#34;]
+        REST[&#34;REST/WebSocket API&#34;]
+    end
+
+    subgraph UI[&#34;Dashboard (React + Leaflet + Charts)&#34;]
+        MAP[&#34;Plume &amp; AQI Map&#34;]
+        CHARTS[&#34;72h Forecast Charts&#34;]
+        GAUGE[&#34;Inversion Risk Gauge&#34;]
+        EXPLAIN[&#34;Cause→Effect Panel&#34;]
+        ALERT[&#34;Alerts / GRAP Banner&#34;]
+    end
+
+    IMD --&gt; DA
+    CPCB --&gt; DA
+    FIRE --&gt; DA
+    SAT --&gt; DA
+    MG --&gt; DA
+    CFG -.controls.-&gt; DA
+
+    DA --&gt; ING --&gt; INV --&gt; COUPLE
+    ING --&gt; PLUME --&gt; COUPLE
+    COUPLE --&gt; AQI --&gt; DB
+    INV --&gt; DB
+    PLUME --&gt; DB
+
+    DB --&gt; REST --&gt; MAP &amp; CHARTS &amp; GAUGE &amp; EXPLAIN &amp; ALERT
+</pre>
+<p><strong>Key principle:</strong> everything below the &quot;Data Source Adapter Layer&quot; line (ingestion, inversion module, plume module, coupling engine, AQI computation, storage, API, dashboard) <strong>never changes</strong> whether the data is mock or live. Only the adapter implementation changes.</p>
+<hr>
+<h2>9. The Mock ↔ Real Data Strategy (Core Design)</h2>
+<p>This is the architectural answer to <em>&quot;build with mock data now, connect real data later without rework.&quot;</em></p>
+<h3>9.1 Design Pattern: Adapter + Strategy + Feature Flag</h3>
+<pre><code>DataSourceAdapter (abstract interface)
+ ├── fetch_weather(location, time_range) -&gt; WeatherRecord[]
+ ├── fetch_pollution(location, time_range) -&gt; PollutionRecord[]
+ ├── fetch_fire_events(region, time_range) -&gt; FireEvent[]
+ └── fetch_satellite(region, time_range) -&gt; SatelliteTile[]   # optional/stretch
+
+MockDataAdapter implements DataSourceAdapter      # Phase 1
+LiveDataAdapter implements DataSourceAdapter      # Phase 2 (per real source)
+   ├── IMDAdapter, CPCBAdapter, ERA5Adapter, VIIRSAdapter, Sentinel5PAdapter
+</code></pre>
+<p>A factory reads a config value per data type and returns the correct adapter:</p>
+<pre><code class="language-python"># config.yaml
+data_sources:
+  weather: mock        # mock | imd | era5
+  pollution: mock       # mock | cpcb | safar
+  fire: mock            # mock | viirs
+  satellite: mock       # mock | sentinel5p
+
+# factory.py
+def get_adapter(source_type: str, provider: str) -&gt; DataSourceAdapter:
+    if provider == &#34;mock&#34;:
+        return MockDataAdapter(source_type)
+    return LIVE_ADAPTER_REGISTRY[provider]()
+</code></pre>
+<p><strong>Result:</strong> switching from demo to production is a one-line config change per data source — weather can go live while pollution stays mock, enabling incremental rollout as real API access (e.g., CPCB data.gov.in approval) comes through.</p>
+<h3>9.2 Shared Data Contract (Schema)</h3>
+<p>Both mock and live adapters MUST return data in this exact schema, so nothing downstream cares which one produced it.</p>
+<pre><code class="language-json">// WeatherRecord
+{
+  &#34;timestamp&#34;: &#34;2026-11-05T06:00:00+05:30&#34;,
+  &#34;station_or_grid_id&#34;: &#34;DELHI_CENTRAL&#34;,
+  &#34;lat&#34;: 28.6139, &#34;lon&#34;: 77.2090,
+  &#34;temperature_c&#34;: 14.2,
+  &#34;wind_speed_ms&#34;: 1.8,
+  &#34;wind_dir_deg&#34;: 310,
+  &#34;pbl_height_m&#34;: 220,
+  &#34;surface_pressure_hpa&#34;: 1015.3,
+  &#34;vertical_temp_profile_c&#34;: [14.2, 13.9, 14.6, 15.1, 15.8]  // used for inversion calc
+}
+
+// PollutionRecord
+{
+  &#34;timestamp&#34;: &#34;2026-11-05T06:00:00+05:30&#34;,
+  &#34;station_id&#34;: &#34;CPCB_ITO&#34;,
+  &#34;lat&#34;: 28.628, &#34;lon&#34;: 77.241,
+  &#34;pm25&#34;: 285.4, &#34;pm10&#34;: 410.2, &#34;o3&#34;: 38.1, &#34;no2&#34;: 62.5, &#34;so2&#34;: 9.8, &#34;co&#34;: 1.4
+}
+
+// FireEvent
+{
+  &#34;timestamp&#34;: &#34;2026-11-05T00:00:00+05:30&#34;,
+  &#34;lat&#34;: 30.21, &#34;lon&#34;: 75.65,
+  &#34;frp_mw&#34;: 42.7,               // Fire Radiative Power
+  &#34;confidence&#34;: 0.87,
+  &#34;region&#34;: &#34;Punjab-Sangrur&#34;
+}
+
+// SatelliteTile (optional/stretch)
+{
+  &#34;timestamp&#34;: &#34;2026-11-05T05:30:00+05:30&#34;,
+  &#34;product&#34;: &#34;AOD_550nm&#34;,
+  &#34;bbox&#34;: [76.8, 28.4, 77.6, 28.9],
+  &#34;grid_resolution_km&#34;: 1,
+  &#34;values&#34;: &#34;&lt;base64 or reference to tile file&gt;&#34;
+}
+</code></pre>
+<h3>9.3 Mock Data Generator — how it stays realistic</h3>
+<ul>
+<li>Seeded using <strong>statistical distributions fitted to real historical CPCB/IMD data</strong> (e.g., PM2.5 diurnal cycle, wind-speed climatology, Oct–Nov stubble-season spike shape) rather than pure random noise — so demo forecasts look and behave like real Delhi winters.</li>
+<li>Injects <strong>synthetic fire events</strong> in a Punjab/Haryana bounding box during a &quot;simulated stubble season,&quot; so the plume-tracking and two-way coupling features have something real to react to during the demo.</li>
+<li>Deterministic seed option, so judges can see the <em>same</em> scenario reproduced, plus a &quot;randomize scenario&quot; button to show robustness.</li>
+</ul>
+<h3>9.4 Migration Checklist (Mock → Live)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Register API credentials for the target source (CPCB data.gov.in key, IMD access, etc.)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Implement <code>LiveDataAdapter</code> subclass mapping the provider's raw response → shared schema (Section 9.2)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Add a schema-validation unit test comparing Mock vs Live adapter outputs (must satisfy same Pydantic model)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Flip <code>data_sources.&lt;type&gt;</code> in config from <code>mock</code> to the provider name</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Run in shadow mode (both adapters active, compare outputs) for validation before full cutover</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>10. Prototype Description (What Will Actually Be Built for SIH)</h2>
+<h3>10.1 Concept Name</h3>
+<p><strong>AeroSense-Delhi</strong> — <em>&quot;Observe → Understand → Simulate → Predict → Explain&quot;</em></p>
+<h3>10.2 What the demo shows</h3>
+<ol>
+<li>A live dashboard opens on a map of Delhi NCR, current AQI overlay by zone.</li>
+<li>A &quot;Run Forecast&quot; (or auto-refreshing) cycle produces a 72-hour AQI trajectory chart.</li>
+<li>A synthetic stubble-burning event is visible on the map (Punjab region) with a plume-arrival animation (slider: Now/+6h/+12h/+24h/+48h/+72h) showing it drifting toward Delhi under the wind field.</li>
+<li>An <strong>Inversion Strength Index gauge</strong> shows rising inversion risk overnight, and the AQI chart visibly worsens in tandem — demonstrating the two-way coupling, not just a static forecast.</li>
+<li>The <strong>explainability panel</strong> narrates <em>why</em>: &quot;Because of X plume + weak winds + strengthening inversion, AQI will hit Severe by hour 40.&quot;</li>
+<li>A <strong>GRAP recommendation banner</strong> appears once thresholds are crossed (e.g., &quot;Forecast crosses 400 AQI at T+36h → Recommend GRAP Stage III readiness&quot;).</li>
+<li>An <strong>admin/data-source panel</strong> (shown briefly to judges) proves the mock↔live architecture: toggling a switch labeled <code>weather: MOCK → toggled to LIVE-ready</code> with no other code path changing — this is the technical differentiator to emphasize.</li>
+</ol>
+<h3>10.3 Surrogate Coupled Model (replaces WRF-Chem for the prototype)</h3>
+<p>Since running actual WRF-Chem is infeasible in a hackathon (needs an HPC cluster and hours-to-days per run), the prototype implements a <strong>physics-informed surrogate model</strong> that reproduces the <em>qualitative and directional</em> two-way coupling behavior WRF-Chem would capture, calibrated against real historical Delhi NCR patterns. This is explicitly documented (in the demo pitch) as &quot;WRF-Chem-ready&quot; — the interfaces below map 1:1 onto what a real WRF-Chem output-ingestion module would provide.</p>
+<p><strong>Step-by-step per 3-hour timestep, for horizon t = 0..72h:</strong></p>
+<ol>
+<li>
+<p><strong>Dispersion base term</strong> — pollutant concentration is diffused by wind speed (higher wind → more dispersion):
+<code>dispersion_factor(t) = k1 / (wind_speed(t) + ε)</code></p>
+</li>
+<li>
+<p><strong>Inversion trapping term</strong> — from Section 11 below, <code>ISI(t)</code> (0–1 normalized) scales up trapped concentration:
+<code>trapping_factor(t) = 1 + k2 * ISI(t)</code></p>
+</li>
+<li>
+<p><strong>Plume contribution</strong> — from the Stubble Plume module (Section 12), <code>plume_PM25(t)</code> (µg/m³ arriving from fires).</p>
+</li>
+<li>
+<p><strong>Combined pollutant forecast:</strong>
+<code>PM2.5(t) = baseline_PM25(t) * dispersion_factor(t) * trapping_factor(t) + plume_PM25(t)</code></p>
+</li>
+<li>
+<p><strong>Feedback into weather (Pollution → Weather):</strong>
+<code>radiation_forcing(t) = -k3 * PM2.5(t)  // more aerosol, less surface heating</code>
+<code>PBL_height(t+1) = PBL_height_climatology(t+1) + radiation_forcing(t)  // suppressed PBL</code>
+<code>temperature(t+1) = temperature_climatology(t+1) + k4 * radiation_forcing(t)</code></p>
+</li>
+<li>
+<p>Recompute <code>ISI(t+1)</code> using the updated (feedback-adjusted) temperature/PBL — <strong>closing the loop</strong> for the next timestep.</p>
+</li>
+</ol>
+<p>Constants <code>k1..k4</code> are calibrated (even approximately) against historical Nov 2023/2024 Delhi CPCB+IMD data so the demo's behavior is directionally realistic, not arbitrary.</p>
+<h3>10.4 Screens / UI Inventory</h3>
+<ul>
+<li><strong>Map View</strong> (Leaflet): AQI choropleth by zone, plume overlay, time slider</li>
+<li><strong>Forecast View</strong>: 72h line charts per pollutant + AQI, with confidence band</li>
+<li><strong>Inversion Panel</strong>: gauge (Low/Moderate/High/Severe) + trend sparkline</li>
+<li><strong>Explain Panel</strong>: auto-generated natural-language cause→effect text</li>
+<li><strong>Alerts/GRAP Banner</strong>: threshold-crossing notification</li>
+<li><strong>Admin Panel</strong>: data-source mode toggle + last-fetch health status (proves architecture)</li>
+</ul>
+<hr>
+<h2>11. Inversion Strength Index (ISI) — Calculation Detail</h2>
+<p>Computed from the vertical temperature profile (<code>vertical_temp_profile_c</code>, surface → ~500m in mock data, or real radiosonde/model levels in production):</p>
+<pre><code>lapse_rate = (T_top - T_surface) / height_diff
+if lapse_rate &gt; 0:   # temperature increases with height = inversion
+    ISI = normalize(lapse_rate, min=0, max=observed_max_lapse)  # 0-1
+else:
+    ISI = 0  # neutral/unstable, no inversion
+
+Classification:
+  ISI &lt; 0.25          -&gt; Low
+  0.25 &lt;= ISI &lt; 0.5    -&gt; Moderate
+  0.5  &lt;= ISI &lt; 0.75   -&gt; High
+  ISI &gt;= 0.75          -&gt; Severe
+</code></pre>
+<hr>
+<h2>12. Stubble Plume Dispersion Module</h2>
+<p>Simplified <strong>Gaussian plume / trajectory advection</strong> approach (a lightweight stand-in for HYSPLIT/WRF-Chem plume physics):</p>
+<ol>
+<li>Each <code>FireEvent</code> (lat, lon, FRP) is treated as a point emission source with strength proportional to <code>frp_mw</code>.</li>
+<li>At each timestep, the plume centroid is advected by the current wind vector: <code>new_position = position + wind_vector * Δt</code>.</li>
+<li>Plume spreads (Gaussian sigma) grows with distance traveled and inversely with wind speed (calm air → more concentrated but slower-moving plume — consistent with real dispersion physics).</li>
+<li>When the plume polygon intersects the Delhi NCR bounding box, an <strong>arrival time</strong> and <strong>estimated PM2.5 contribution</strong> are computed and fed into the coupling engine (<code>plume_PM25(t)</code> in Section 10.3).</li>
+</ol>
+<hr>
+<h2>13. Backend API Design (REST)</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/v1/forecast/{zone_id}</code></td>
+<td>GET</td>
+<td>72h forecast for a zone (AQI, pollutants, weather)</td>
+</tr>
+<tr>
+<td><code>/api/v1/inversion/current</code></td>
+<td>GET</td>
+<td>Current ISI + trend</td>
+</tr>
+<tr>
+<td><code>/api/v1/plume/timeline</code></td>
+<td>GET</td>
+<td>Plume polygons for Now/+6h/.../+72h</td>
+</tr>
+<tr>
+<td><code>/api/v1/alerts</code></td>
+<td>GET</td>
+<td>Active/recent threshold-crossing alerts</td>
+</tr>
+<tr>
+<td><code>/api/v1/explain/{forecast_id}</code></td>
+<td>GET</td>
+<td>Cause→effect explanation text</td>
+</tr>
+<tr>
+<td><code>/api/v1/admin/data-sources</code></td>
+<td>GET/PATCH</td>
+<td>View &amp; toggle mock/live mode per source</td>
+</tr>
+<tr>
+<td><code>/api/v1/run-forecast</code></td>
+<td>POST</td>
+<td>Trigger a new forecast cycle (demo control)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>14. Data Storage Schema (simplified)</h2>
+<pre><code class="language-sql">-- observations (mock or live, tagged by source_mode)
+CREATE TABLE weather_obs (
+  id SERIAL PRIMARY KEY, ts TIMESTAMPTZ, station_id TEXT,
+  lat FLOAT, lon FLOAT, temperature_c FLOAT, wind_speed_ms FLOAT,
+  wind_dir_deg FLOAT, pbl_height_m FLOAT, source_mode TEXT -- &#39;mock&#39; | &#39;live&#39;
+);
+
+CREATE TABLE pollution_obs (
+  id SERIAL PRIMARY KEY, ts TIMESTAMPTZ, station_id TEXT,
+  lat FLOAT, lon FLOAT, pm25 FLOAT, pm10 FLOAT, o3 FLOAT, no2 FLOAT,
+  source_mode TEXT
+);
+
+CREATE TABLE fire_events (
+  id SERIAL PRIMARY KEY, ts TIMESTAMPTZ, lat FLOAT, lon FLOAT,
+  frp_mw FLOAT, confidence FLOAT, region TEXT, source_mode TEXT
+);
+
+CREATE TABLE forecasts (
+  id SERIAL PRIMARY KEY, run_ts TIMESTAMPTZ, valid_ts TIMESTAMPTZ,
+  zone_id TEXT, pm25 FLOAT, pm10 FLOAT, o3 FLOAT, aqi INT,
+  isi FLOAT, pbl_height_m FLOAT, model_version TEXT, source_mode TEXT
+);
+
+CREATE TABLE alerts (
+  id SERIAL PRIMARY KEY, forecast_id INT REFERENCES forecasts(id),
+  triggered_ts TIMESTAMPTZ, threshold_crossed INT, grap_stage TEXT, delivered BOOLEAN
+);
+</code></pre>
+<p><em>(TimescaleDB extension recommended over plain PostgreSQL for efficient time-series queries once real data volume grows.)</em></p>
+<hr>
+<h2>15. Technology Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Prototype Choice</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data generation</td>
+<td>Python (NumPy, pandas, SciPy stats)</td>
+<td>Fast to build realistic synthetic series</td>
+</tr>
+<tr>
+<td>Backend / API</td>
+<td>Python <strong>FastAPI</strong></td>
+<td>Async, auto-generated OpenAPI docs, fast to build</td>
+</tr>
+<tr>
+<td>Adapter layer</td>
+<td>Python (ABC interfaces, Pydantic schemas)</td>
+<td>Enforces the mock/live contract cleanly</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>PostgreSQL (+ TimescaleDB if time permits); SQLite acceptable for a 24–36h hackathon build</td>
+<td>Time-series friendly, production-realistic</td>
+</tr>
+<tr>
+<td>Model core</td>
+<td>Python (NumPy) surrogate model</td>
+<td>Production target: WRF-Chem (Fortran) on HPC — documented, not built</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React + Leaflet (maps) + Recharts/Chart.js (time series)</td>
+<td>Modern, judge-friendly, matches &quot;real dashboard&quot; expectation</td>
+</tr>
+<tr>
+<td>Deployment (demo)</td>
+<td>Docker Compose (API + DB + frontend)</td>
+<td>One-command local/offline demo, matches offline requirement</td>
+</tr>
+<tr>
+<td>Version control</td>
+<td>Git/GitHub</td>
+<td>Standard</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>16. Implementation Timeline</h2>
+<h3>16.1 Hackathon Build Sprint (assuming ~36–48 hrs + prep runway)</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Day -7 to -1 (prep)</td>
+<td>Finalize schema, build mock data generator against real historical Delhi CPCB/IMD stats, scaffold FastAPI + DB, scaffold React dashboard shell</td>
+</tr>
+<tr>
+<td>Hour 0–8</td>
+<td>Adapter layer + Mock adapter fully working; ingestion + storage pipeline live</td>
+</tr>
+<tr>
+<td>Hour 8–16</td>
+<td>Inversion module + Plume module + Coupling engine (surrogate model) producing forecasts</td>
+</tr>
+<tr>
+<td>Hour 16–28</td>
+<td>Dashboard: map, charts, inversion gauge, plume slider</td>
+</tr>
+<tr>
+<td>Hour 28–36</td>
+<td>Explainability panel, alerts/GRAP banner, admin data-source toggle panel</td>
+</tr>
+<tr>
+<td>Hour 36–44</td>
+<td>Calibration pass against historical Nov 2023/24 Delhi episode for realism; polish</td>
+</tr>
+<tr>
+<td>Hour 44–48</td>
+<td>Demo script rehearsal, judge Q&amp;A prep, README/architecture slide</td>
+</tr>
+</tbody>
+</table>
+<h3>16.2 Post-SIH Production Roadmap</h3>
+<ol>
+<li><strong>Months 1–2:</strong> Secure CPCB/IMD data access (data.gov.in, MoES channels); build first <code>LiveDataAdapter</code>s; shadow-mode validation.</li>
+<li><strong>Months 2–4:</strong> Stand up WRF-Chem on HPC/cloud (9→3→1 km nested domain); replace surrogate model output with real WRF-Chem output ingestion (same downstream schema).</li>
+<li><strong>Months 4–6:</strong> Data assimilation (3DVar/EnKF) of satellite AOD + surface PM2.5.</li>
+<li><strong>Months 6–8:</strong> Pilot with MoES/Delhi authorities; stakeholder feedback loop.</li>
+<li><strong>Months 8–12:</strong> Scale to full NCR zones, bilingual UI, SMS/WhatsApp alert gateway, production hardening.</li>
+</ol>
+<hr>
+<h2>17. Team Roles (suggested for a 6-member SIH team)</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend/API Lead</td>
+<td>FastAPI, adapter layer, DB schema</td>
+</tr>
+<tr>
+<td>Data/Modeling Lead</td>
+<td>Mock data generator, surrogate coupling model, inversion &amp; plume math</td>
+</tr>
+<tr>
+<td>Frontend Lead</td>
+<td>React dashboard, map, charts</td>
+</tr>
+<tr>
+<td>ML/Research</td>
+<td>Calibration against historical data, explainability text generation</td>
+</tr>
+<tr>
+<td>Domain/Docs Lead</td>
+<td>SIH alignment, pitch deck, judge Q&amp;A prep, references</td>
+</tr>
+<tr>
+<td>DevOps/Integration</td>
+<td>Docker setup, demo reliability, admin panel, presentation logistics</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>18. Risks &amp; Mitigations</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Judges question &quot;where's the real WRF-Chem?&quot;</td>
+<td>Be upfront: surrogate model demoed live; WRF-Chem is the documented production target; show the adapter architecture as proof the system is <em>designed</em> for it</td>
+</tr>
+<tr>
+<td>Mock data looks &quot;too clean&quot;/unrealistic</td>
+<td>Calibrate generator against real historical Delhi CPCB/IMD statistics; inject noise and real event timing</td>
+</tr>
+<tr>
+<td>Scope creep into ISRO problem statement</td>
+<td>Keep satellite layer clearly labeled &quot;optional enrichment&quot;; core demo stays Delhi-NCR 72h coupled forecast per SIH mandate</td>
+</tr>
+<tr>
+<td>Time overrun on frontend polish</td>
+<td>Build dashboard skeleton first with fake static data, wire to real API last</td>
+</tr>
+<tr>
+<td>Two-way coupling not visually obvious to judges</td>
+<td>Explicit gauge + explanation panel that narrates the feedback loop in plain language during demo</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>19. Success Metrics (for the Prototype / Demo)</h2>
+<ul>
+<li>All 6 SIH mandatory scope items (A–F) demonstrably present and clickable in the live dashboard.</li>
+<li>Forecast cycle runs end-to-end (data → inversion → plume → coupling → AQI → dashboard) in under 10 seconds.</li>
+<li>Judges can toggle a data source from Mock → Live-ready in the admin panel and see zero downstream code impact — this is the single strongest technical proof point for the &quot;real data later&quot; claim.</li>
+<li>Explainability panel produces a coherent, correct cause→effect sentence for at least 3 distinct synthetic scenarios (normal day, stubble spike, deep inversion).</li>
+</ul>
+<hr>
+<h2>20. Future Scope</h2>
+<ul>
+<li>Replace surrogate model with full WRF-Chem (production target already implied by architecture).</li>
+<li>Add the ISRO-layer satellite intelligence (INSAT-3D AOD, Sentinel-5P HCHO/NO₂, VIIRS fire) as live <code>LiveDataAdapter</code>s once satellite pipelines are integrated — the architecture already reserves a schema and adapter slot for this (Section 9.2, <code>SatelliteTile</code>).</li>
+<li>ML-based bias correction / satellite-to-surface CNN-LSTM model (as suggested by the related ISRO problem statement) as a post-processing layer on top of WRF-Chem output.</li>
+<li>Expand beyond Delhi NCR to the wider Indo-Gangetic Plain.</li>
+<li>SMS/WhatsApp/email alert gateway integration for GRAP-stage notifications.</li>
+<li>Bilingual (Hindi/English) UI for wider adoption by Delhi/NCR authorities.</li>
+</ul>
+<hr>
+<h2>21. References</h2>
+<ul>
+<li>SIH Problem Statement #26082 — &quot;Air Pollution–Weather Coupled Forecasting System (Delhi NCR Focus),&quot; MoES (2026).</li>
+<li>Jena et al. (2021), <em>Scientific Reports</em> — Performance of high-resolution (400 m) PM2.5 forecast over Delhi.</li>
+<li>Centre for Research on Energy and Clean Air (2022) — Delhi's air quality and stubble-burning trends.</li>
+<li>Copernicus Atmosphere Monitoring Service (CAMS) — Air Quality overview.</li>
+<li>CPCB National Air Quality Index methodology.</li>
+</ul>
+<hr>
+<h2>Appendix A: Sample Mock API Response (for reference during development)</h2>
+<pre><code class="language-json">GET /api/v1/forecast/DELHI_CENTRAL
+{
+  &#34;zone_id&#34;: &#34;DELHI_CENTRAL&#34;,
+  &#34;generated_at&#34;: &#34;2026-11-05T06:00:00+05:30&#34;,
+  &#34;source_mode&#34;: &#34;mock&#34;,
+  &#34;model_version&#34;: &#34;surrogate-v0.3&#34;,
+  &#34;series&#34;: [
+    {&#34;valid_ts&#34;: &#34;2026-11-05T09:00:00+05:30&#34;, &#34;pm25&#34;: 210, &#34;pm10&#34;: 340, &#34;o3&#34;: 41, &#34;aqi&#34;: 318, &#34;isi&#34;: 0.42, &#34;pbl_height_m&#34;: 260},
+    {&#34;valid_ts&#34;: &#34;2026-11-05T12:00:00+05:30&#34;, &#34;pm25&#34;: 195, &#34;pm10&#34;: 320, &#34;o3&#34;: 55, &#34;aqi&#34;: 296, &#34;isi&#34;: 0.30, &#34;pbl_height_m&#34;: 410},
+    {&#34;valid_ts&#34;: &#34;2026-11-06T03:00:00+05:30&#34;, &#34;pm25&#34;: 340, &#34;pm10&#34;: 460, &#34;o3&#34;: 22, &#34;aqi&#34;: 402, &#34;isi&#34;: 0.81, &#34;pbl_height_m&#34;: 140}
+  ],
+  &#34;plume_alert&#34;: {
+    &#34;active&#34;: true,
+    &#34;source_region&#34;: &#34;Punjab-Sangrur&#34;,
+    &#34;eta_hours&#34;: 30,
+    &#34;estimated_pm25_contribution&#34;: 85
+  }
+}
+</code></pre>
+
+
+<!--claude-mermaid-runtime-begin:3477-->
+<style>.mermaid-diagram{margin-block:4px}.mermaid-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}</style>
+<script src="/_runtime/mermaid-11.16.1.min.js"></script>
+<script>(function(){
+var CFG={"palettes":{"light":{"surface":"#f4efe4","text":"#42392e","line":"#8a7f6d","border":"#7a6c52","bg":"#fffdf8"},"dark":{"surface":"#262b34","text":"#f2f3f5","line":"#a8adb8","border":"#9aa4b8","bg":"#1f232b"}}};
+if(typeof mermaid==='undefined')return;
+var pres=Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function(p){if(p.hasAttribute('data-claude-mermaid-claimed'))return false;p.setAttribute('data-claude-mermaid-claimed','1');return true;});
+if(!pres.length)return;
+var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+var root=document.documentElement;
+var items=pres.map(function(pre){
+var mount=document.createElement('div');mount.className='mermaid-diagram';
+return {pre:pre,mount:mount,src:pre.textContent||''};
+});
+var seq=0;
+var renderGen=0;
+var lastKey='';
+function pageBg(fallback){
+var els=[document.body,document.documentElement];
+for(var i=0;i<els.length;i++){
+var c=els[i]&&getComputedStyle(els[i]).backgroundColor;
+if(c&&c!=='transparent'&&c!=='rgba(0, 0, 0, 0)')return c;
+}
+return fallback;
+}
+function render(){
+var theme=root.getAttribute('data-theme');
+var dark=theme==='dark'||(!!(mq&&mq.matches)&&theme!=='light');
+var pal=dark?CFG.palettes.dark:CFG.palettes.light;
+var bg=pageBg(pal.bg);
+var key=(dark?'d':'l')+'|'+bg;
+if(key===lastKey)return;
+lastKey=key;
+var gen=++renderGen;
+var font=getComputedStyle(document.body).fontFamily||'sans-serif';
+var nat={useMaxWidth:false};
+mermaid.initialize({
+startOnLoad:false,securityLevel:'strict',theme:'base',
+flowchart:nat,sequence:nat,er:nat,state:nat,class:nat,pie:nat,
+gantt:nat,journey:nat,timeline:nat,gitGraph:nat,mindmap:nat,xyChart:nat,
+quadrantChart:nat,sankey:nat,c4:nat,requirement:nat,block:nat,
+packet:nat,kanban:nat,architecture:nat,radar:nat,
+themeVariables:{background:bg,mainBkg:pal.surface,primaryColor:pal.surface,
+primaryTextColor:pal.text,lineColor:pal.line,primaryBorderColor:pal.border,
+nodeBorder:pal.border,clusterBorder:pal.border,edgeLabelBackground:bg,
+clusterBkg:'rgba(127,127,127,0.07)',titleColor:pal.text,
+darkMode:dark,rowOdd:bg,rowEven:'rgba(127,127,127,0.07)',
+attributeBackgroundColorOdd:bg,attributeBackgroundColorEven:'rgba(127,127,127,0.07)',
+fontSize:'16px',fontFamily:font},
+themeCSS:'.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
+});
+items.forEach(function(it){
+var id='claude-mermaid-'+seq++;
+mermaid.render(id,it.src).then(function(r){
+if(gen!==renderGen)return;
+var prev=it.pre.previousElementSibling;
+if(prev&&prev.className==='mermaid-diagram'&&prev!==it.mount)return;
+it.mount.innerHTML=r.svg;
+if(!it.mount.parentNode)it.pre.parentNode.insertBefore(it.mount,it.pre);
+it.pre.style.display='none';
+},function(){
+var scratch=document.getElementById(id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+scratch=document.getElementById('d'+id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+if(gen!==renderGen)return;
+if(it.mount.parentNode)it.mount.parentNode.removeChild(it.mount);
+it.pre.style.display='';
+});
+});
+}
+render();
+if(mq&&mq.addEventListener)mq.addEventListener('change',render);
+if(typeof MutationObserver!=='undefined')new MutationObserver(render).observe(root,{attributes:true,attributeFilter:['data-theme']});
+})();</script>
+<!--claude-mermaid-runtime-end-->
+</body></html>

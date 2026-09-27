@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f\",\"title\":\"Inversion & Atmospheric Insight - AeroSense Delhi\",\"screenshot\":{\"name\":\"projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AEtjO1X3qra6efa8G_72wNx7CVFvckAGnbjrhCt6ySdSKZWu3M_g5kqwCmDqrVwQA_9HViqHDU2pQnrWGlDqz7lS4M0m4n8drQhXpLzOTgpq8cQYO23Jm-atlJb-N3LDqdjt-jLKzp3nZ-NG8fqy6UWXGw6twZt4SqCN0TDdbdE8Hhk50mR7NM_cMqbwxH0I4FHLusenCby0CT-qK6d8iRt1uI1rfB89PvYtA_Hk_AKmzz16UVZLott2CcLMdQ\"},\"htmlCode\":{\"name\":\"projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOWExMjA0ZWUwMWE2MTExZmE3MjBlNGNmEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4190\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "4190",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOWExMjA0ZWUwMWE2MTExZmE3MjBlNGNmEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f/fileEntries/html"
+      },
+      "name": "projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1X3qra6efa8G_72wNx7CVFvckAGnbjrhCt6ySdSKZWu3M_g5kqwCmDqrVwQA_9HViqHDU2pQnrWGlDqz7lS4M0m4n8drQhXpLzOTgpq8cQYO23Jm-atlJb-N3LDqdjt-jLKzp3nZ-NG8fqy6UWXGw6twZt4SqCN0TDdbdE8Hhk50mR7NM_cMqbwxH0I4FHLusenCby0CT-qK6d8iRt1uI1rfB89PvYtA_Hk_AKmzz16UVZLott2CcLMdQ",
+        "name": "projects/828315316391340215/screens/f9c2212a73254a8ebb051c9fc2a9898f/fileEntries/screenshot"
+      },
+      "title": "Inversion & Atmospheric Insight - AeroSense Delhi",
+      "width": "2560"
+    }
+  }
+}

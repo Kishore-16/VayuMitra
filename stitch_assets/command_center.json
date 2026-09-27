@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691\",\"title\":\"Official Command Center - AeroSense Delhi\",\"screenshot\":{\"name\":\"projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AEtjO1WQRRKdYfCGAE5JxNPeRb3IjSzs1gyIeptsbr_LiDfO1Xs0_c1xmlDOWnJmXTO1nEGJduA6IRGuTkSfUjhOQlfXiqMhOlu_O8fWWFOH7gEoIKe-AydYx2cdU1dCFqY44NpCcMOgCL2RF390eIA6hLryDDg2FEkJKfakOLyWRKwQ-xkN0vQo5_6X8taB--ufzf_jg8HiJScJns8S0GxTLwRK5uK1N3lcPOBhiPegYfsOXxnq4H6tsFoc\"},\"htmlCode\":{\"name\":\"projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOWEyMDg0YTcwNzNhZmI1YTNjMDUxY2JjEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"4506\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "4506",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOWEyMDg0YTcwNzNhZmI1YTNjMDUxY2JjEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691/fileEntries/html"
+      },
+      "name": "projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WQRRKdYfCGAE5JxNPeRb3IjSzs1gyIeptsbr_LiDfO1Xs0_c1xmlDOWnJmXTO1nEGJduA6IRGuTkSfUjhOQlfXiqMhOlu_O8fWWFOH7gEoIKe-AydYx2cdU1dCFqY44NpCcMOgCL2RF390eIA6hLryDDg2FEkJKfakOLyWRKwQ-xkN0vQo5_6X8taB--ufzf_jg8HiJScJns8S0GxTLwRK5uK1N3lcPOBhiPegYfsOXxnq4H6tsFoc",
+        "name": "projects/828315316391340215/screens/964689bbaf174d499e5abe7520eb3691/fileEntries/screenshot"
+      },
+      "title": "Official Command Center - AeroSense Delhi",
+      "width": "2560"
+    }
+  }
+}

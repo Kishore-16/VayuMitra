@@ -1,0 +1,27 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207\",\"title\":\"AeroSense Delhi Brand Emblem\",\"screenshot\":{\"name\":\"projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AEtjO1USqvT5wQmPV5qV6-NQs4LumD7VNbqt5y9Fz4eqXHrWj2gdf1J1iUDAOgWs8K5kRFteNB7xwnMCsdjUQrtKJkhJftQCdA0-OecGxRPJMZAZelxRTn72c95PKhDrvDZnWhlpV8UyYkLwdueqmQOmk0ZAu6-kr-ouiYC9SmO-UJxPKzMUvrKBDYfW5tEz9gXqeLDSdWpohuBe5dQSWn-2CQuTsOYZXkKQOBx3yk_VeIBAH1B2ObhMO5koBA\"},\"htmlCode\":{\"name\":\"projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTUyOTYwMjgwNGVhYTc5ZWRjMmJkMDUyEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086\",\"mimeType\":\"image/svg+xml\"},\"width\":\"512\",\"height\":\"512\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "height": "512",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTUyOTYwMjgwNGVhYTc5ZWRjMmJkMDUyEgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086",
+        "mimeType": "image/svg+xml",
+        "name": "projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207/fileEntries/html"
+      },
+      "name": "projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1USqvT5wQmPV5qV6-NQs4LumD7VNbqt5y9Fz4eqXHrWj2gdf1J1iUDAOgWs8K5kRFteNB7xwnMCsdjUQrtKJkhJftQCdA0-OecGxRPJMZAZelxRTn72c95PKhDrvDZnWhlpV8UyYkLwdueqmQOmk0ZAu6-kr-ouiYC9SmO-UJxPKzMUvrKBDYfW5tEz9gXqeLDSdWpohuBe5dQSWn-2CQuTsOYZXkKQOBx3yk_VeIBAH1B2ObhMO5koBA",
+        "name": "projects/828315316391340215/screens/25d3990b4e2040ea974f0ae07c591207/fileEntries/screenshot"
+      },
+      "title": "AeroSense Delhi Brand Emblem",
+      "width": "512"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\"name\":\"projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b\",\"title\":\"Stubble-Burning Plume Tracker - AeroSense Delhi\",\"screenshot\":{\"name\":\"projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AEtjO1WYZjORZc6sBHMtelD3Louq7SFqRkMyrHjIfUyoarSBuW7pALVr1XXMdX7AMJNEglqKpHk4ovJ5lwHhPRv_LP95IbsMrT_DaCuKGDmGyD_KQsaYtGT2a5gZcuvb3xKvh1o74E53j7vTn5sIlr9dq_Rvz1iCrJ-SbN7SaFZJDF3Z6wBi_0h6NC8NlpPnJ346wjKJwutBzAhnBBZEq7ayhHdugnwKlIObG52vaZsGP23N_swB9MPj1bfkAw\"},\"htmlCode\":{\"name\":\"projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTllYmZhMTgwMzM4NjE0ZTIzMzE4OWQ2EgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"3384\",\"deviceType\":\"DESKTOP\"}",
+        "type": "text"
+      }
+    ],
+    "structuredContent": {
+      "deviceType": "DESKTOP",
+      "height": "3384",
+      "htmlCode": {
+        "downloadUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ6Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpZCiVodG1sXzAwMDY1YzVmOTllYmZhMTgwMzM4NjE0ZTIzMzE4OWQ2EgsSBxDPsLWotA8YAZIBIgoKcHJvamVjdF9pZBIUQhI4MjgzMTUzMTYzOTEzNDAyMTU&filename=&opi=89354086",
+        "mimeType": "text/html",
+        "name": "projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b/fileEntries/html"
+      },
+      "name": "projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b",
+      "screenshot": {
+        "downloadUrl": "https://lh3.googleusercontent.com/aida/AEtjO1WYZjORZc6sBHMtelD3Louq7SFqRkMyrHjIfUyoarSBuW7pALVr1XXMdX7AMJNEglqKpHk4ovJ5lwHhPRv_LP95IbsMrT_DaCuKGDmGyD_KQsaYtGT2a5gZcuvb3xKvh1o74E53j7vTn5sIlr9dq_Rvz1iCrJ-SbN7SaFZJDF3Z6wBi_0h6NC8NlpPnJ346wjKJwutBzAhnBBZEq7ayhHdugnwKlIObG52vaZsGP23N_swB9MPj1bfkAw",
+        "name": "projects/828315316391340215/screens/f1cf6b46a3fa4d87b5be96d147b6a76b/fileEntries/screenshot"
+      },
+      "title": "Stubble-Burning Plume Tracker - AeroSense Delhi",
+      "width": "2560"
+    }
+  }
+}
