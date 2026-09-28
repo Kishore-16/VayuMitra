@@ -16,6 +16,7 @@ import { FeedbackView } from './feedback-view'
 import { PlumesView } from './plumes-view'
 import { GrapView } from './grap-view'
 import { AnomaliesView } from './anomalies-view'
+import { HeatmapView } from './heatmap-view'
 import { PolicySimulatorModal } from './policy-simulator-modal'
 import { StationDetailModal } from './station-detail-modal'
 
@@ -140,6 +141,16 @@ export function Dashboard() {
               target={mapTarget}
               onTarget={setMapTarget}
               onStation={setStationId}
+            />
+          )}
+          {tab === 'heatmap' && (
+            <HeatmapView
+              point={point}
+              forecast={data.forecast}
+              stations={stations}
+              fires={data.fires}
+              trajectories={data.trajectories}
+              hour={hour}
             />
           )}
           {tab === 'sounding' && <SoundingView sounding={sounding} />}

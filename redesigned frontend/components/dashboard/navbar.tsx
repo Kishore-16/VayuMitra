@@ -1,6 +1,6 @@
 'use client'
 
-import { AlertTriangle, CloudFog, Flame, LayoutDashboard, Map, RefreshCw, ShieldAlert, SlidersHorizontal, Sun, Tornado } from 'lucide-react'
+import { AlertTriangle, CloudFog, Flame, Layers, LayoutDashboard, Map, RefreshCw, ShieldAlert, SlidersHorizontal, Sun, Tornado } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { TabId } from '@/lib/types'
 import type { GrapStage } from '@/lib/aqi'
@@ -8,6 +8,7 @@ import type { GrapStage } from '@/lib/aqi'
 export const TABS: { id: TabId; label: string; icon: typeof Map; blurb: string }[] = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard, blurb: 'What is happening and why' },
   { id: 'map', label: 'Live Map', icon: Map, blurb: 'Stations, fires and wind' },
+  { id: 'heatmap', label: 'Thermal Heatmap', icon: Layers, blurb: 'Spatial pollution & AQI distribution' },
   { id: 'sounding', label: 'Inversion', icon: CloudFog, blurb: 'The lid trapping smog' },
   { id: 'feedback', label: 'Aerosol Feedback', icon: Sun, blurb: 'How smog makes itself worse' },
   { id: 'plumes', label: 'Stubble Smoke', icon: Flame, blurb: 'Crop fires upwind' },

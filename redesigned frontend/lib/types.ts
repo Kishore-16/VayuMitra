@@ -159,4 +159,4 @@ export interface SimulationResult {
   mitigatedStage: string
 }
 
-export type TabId = 'overview' | 'map' | 'sounding' | 'feedback' | 'plumes' | 'grap' | 'anomalies'
+export type TabId = 'overview' | 'map' | 'heatmap' | 'sounding' | 'feedback' | 'plumes' | 'grap' | 'anomalies'
