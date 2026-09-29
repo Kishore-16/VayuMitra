@@ -19,6 +19,7 @@ import { AnomaliesView } from './anomalies-view'
 import { HeatmapView } from './heatmap-view'
 import { PolicySimulatorModal } from './policy-simulator-modal'
 import { StationDetailModal } from './station-detail-modal'
+import { VayuMitraAssistant } from './vayumitra-assistant'
 
 export function Dashboard() {
   const { data, isValidating, mutate } = useDashboard()
@@ -184,6 +185,19 @@ export function Dashboard() {
 
       <PolicySimulatorModal open={sandbox} onClose={() => setSandbox(false)} forecast={data.forecast} isLive={data.source === 'live'} />
       <StationDetailModal station={station} forecast={data.forecast} hour={hour} onClose={() => setStationId(null)} />
+      <VayuMitraAssistant
+        point={point}
+        sounding={sounding}
+        feedback={data.feedback[hour]}
+        hour={hour}
+        tab={tab}
+        station={station}
+        stations={stations}
+        fires={data.fires}
+        trajectories={data.trajectories}
+        anomalies={anomalies}
+        stage={stage}
+      />
     </div>
   )
 }
